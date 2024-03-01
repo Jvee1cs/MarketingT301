@@ -66,16 +66,16 @@ $(document).ready(function() {
             <p class="text-sm font-medium text-center mb-8 text-gray-600">here, you can manage your student records, school records, and user records.</p>
         </div>
 
-        <div class="flex flex-col md:flex-row md:justify-center mt-10 gap-10">
+        <div class="flex flex-col md:flex-row md:justify-center mt-10 gap-10 ">
             <!-- Student Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
-                <h2 class="text-xl font-semibold mb-4 text-blue-900">Student Record</h2>
+                <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">Student Record</h2>
                 <p class="text-gray-600 mb-6 text-gray-100">View and manage Student records.</p>
                 <a href="{{ route('student.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center">Go to Student Records</a>
             </div>
             <!-- School Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
-                <h2 class="text-xl font-semibold mb-4 text-blue-900">School Record</h2>
+                <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">School Record</h2>
                 <p class="text-gray-600 mb-6 text-gray-100">View and manage School records.</p>
                 <a href="{{ route('school.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Go to School Records</a>
                 <form action="{{ route('school.add') }}" method="post">
@@ -85,7 +85,7 @@ $(document).ready(function() {
             </div>
             <!-- User Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
-                <h2 class="text-xl font-semibold mb-4 text-blue-900">User Record</h2>
+                <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">User Record</h2>
                 <p class="text-gray-600 mb-6 text-gray-100">View and manage user records.</p>
                 <a href="{{ route('user.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center block mb-4">Go to User Records</a>
                 <form action="{{ route('user.add') }}" method="post">

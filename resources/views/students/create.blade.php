@@ -59,7 +59,7 @@
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Please select city</option>
                     <option value="Manila">Manila</option>
-                    <!-- Add more options here -->
+                    <option value="Manila">Parañaque</option>
                 </select>
             </div>
             <div>
@@ -68,7 +68,7 @@
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Please select grade level</option>
                     <option value="10">Grade 10</option>
-                    <!-- Add more options here -->
+                    <option value="12">Grade 12</option>
                 </select>
             </div>
             <div>
@@ -76,14 +76,15 @@
                 <select id="strand" name="strand"
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Select Strand</option>
-                    <!-- Add more options here -->
+                    <option value="ICT">ICT</option>
                 </select>
             </div>
             <div>
                 <select id="course" name="course"
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Select course</option>
-                    <!-- Add more options here -->
+                    <option value="">BS IN ENTREPRENEURSHIP</option>
+                    <option value="">BS IN COMPUTER SCIENCE</option>
                 </select>
             </div>
             <h3 class="text-2xl font-medium mb-2">School Information:</h3>
@@ -92,7 +93,7 @@
                 <select id="school_name" name="school_name"
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Please select school</option>
-                    <!-- Add more options here -->
+                    <option value="AICS">AICS</option>
                 </select>
             </div>
             <h3 class="text-2xl font-medium mb-2">Guardian Information:</h3>
