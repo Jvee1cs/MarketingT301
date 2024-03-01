@@ -66,7 +66,7 @@ $(document).ready(function() {
             <p class="text-sm font-medium text-center mb-8 text-gray-600">here, you can manage your student records, school records, and user records.</p>
         </div>
 
-        <div class="flex flex-col md:flex-row md:justify-center mt-10">
+        <div class="flex flex-col md:flex-row md:justify-center mt-10 gap-10">
             <!-- Student Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
                 <h2 class="text-xl font-semibold mb-4 text-blue-900">Student Record</h2>
