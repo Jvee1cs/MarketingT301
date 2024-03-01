@@ -47,3 +47,7 @@ Route::post('/school/add', [SchoolController::class, 'store'])->name('school.add
 Route::get('/user/records', [UserController::class, 'index'])->name('user.records');
 // Define the route for adding user records
 Route::post('/user/add', [UserController::class, 'store'])->name('user.add');
+
+Route::get('/student', [StudentController::class, 'registration'])->name('student.registration');
+Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
+Route::post('/student', [StudentController::class, 'store'])->name('student.store');
