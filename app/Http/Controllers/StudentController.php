@@ -8,6 +8,20 @@ use App\Models\Student;
 
 class StudentController extends Controller
 {
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function StudentRecord()
+    {
+        // Retrieve all students from the database
+        $students = Student::all();
+
+        // Return the view with the students data
+        return view('students.StudentRecords', compact('students'));
+    }
+
     public function showRegistrationForm()
     {
         // You can pass data to the view if needed

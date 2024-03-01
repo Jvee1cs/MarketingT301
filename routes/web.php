@@ -45,9 +45,11 @@ Route::get('/school/records', [SchoolController::class, 'index'])->name('school.
 Route::post('/school/add', [SchoolController::class, 'store'])->name('school.add');
 // Define the route for user records
 Route::get('/user/records', [UserController::class, 'index'])->name('user.records');
-// Define the route for adding user records
+// Route for adding user records
 Route::post('/user/add', [UserController::class, 'store'])->name('user.add');
 
 Route::get('/student', [StudentController::class, 'registration'])->name('student.registration');
 Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
 Route::post('/student', [StudentController::class, 'store'])->name('student.store');
+// Route for Student Records
+Route::get('/students/records', [StudentController::class, 'StudentRecord'])->name('students.Student.Records');
