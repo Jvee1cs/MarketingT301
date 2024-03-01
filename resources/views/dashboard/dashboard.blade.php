@@ -71,7 +71,7 @@ $(document).ready(function() {
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
                 <h2 class="text-xl font-semibold mb-4 text-blue-900">Student Record</h2>
                 <p class="text-gray-600 mb-6 text-gray-100">View and manage Student records.</p>
-                <a href="{{ route('student.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center">Go to Student Records</a>
+                <a href="{{ route('students.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center">Go to Student Records</a>
             </div>
             <!-- School Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">

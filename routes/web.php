@@ -38,7 +38,7 @@ Route::post('/student/register', [StudentController::class, 'submitRegistrationF
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 // Define the route for student records
-Route::get('/student/records', [StudentController::class, 'index'])->name('student.records');
+Route::get('/students/records', [StudentController::class, 'index'])->name('student.records');
 // Define the route for school records
 Route::get('/school/records', [SchoolController::class, 'index'])->name('school.records');
 // Define the route for adding school records
@@ -53,3 +53,6 @@ Route::get('/student/create', [StudentController::class, 'create'])->name('stude
 Route::post('/student', [StudentController::class, 'store'])->name('student.store');
 // Route for Student Records
 Route::get('/students/records', [StudentController::class, 'StudentRecord'])->name('students.Student.Records');
+// Route for Dashborad Buttons to Students Records Page
+
+Route::get('/students/records', [StudentController::class, 'StudentRecord'])->name('students.records');
