@@ -1,27 +1,74 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
+use App\Models\User;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the user records.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use ValidatesRequests; // Add this line
+
+    // Index method for displaying all users
     public function index()
     {
-        // Your logic to fetch and display user records goes here
-        return view('user.records'); // Assuming you have a Blade view named 'user.records'
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
+
+    // Create method for displaying the form to create a new user
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    // Store method for storing a newly created user in the database
     public function store(Request $request)
     {
-        // Your logic to store the user record goes here
-        // For example:
-        // User::create($request->all());
+        // Validate the request
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
 
-        // Redirect to a suitable route after adding the record
-        return redirect()->back()->with('success', 'User record added successfully!');
+        // Create the user
+        User::create($request->all());
+
+        return redirect()->route('users.index');
+    }
+
+    // Show method for displaying the specified user
+    public function show(User $user)
+    {
+        return view('users.show', compact('user'));
+    }
+
+    // Edit method for displaying the form to edit the specified user
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    // Update method for updating the specified user in the database
+    public function update(Request $request, User $user)
+    {
+        // Validate the request
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+        ]);
+
+        // Update the user
+        $user->update($request->all());
+
+        return redirect()->route('users.index');
+    }
+
+    // Destroy method for removing the specified user from the database
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }

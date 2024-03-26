@@ -24,46 +24,52 @@
         </div>
         @endif
         <!-- Form -->
-        <form method="post" action="{{route('student.store')}}" class="space-y-4">
+        <form method="post" action="{{route('students.store')}}" class="space-y-4">
             @csrf
-            @method('post')
             <!-- Input fields -->
+            <!-- First Name -->
             <div>
-                <label for="stud_first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                <label for="stud_first_name" class="block text-sm font-medium text-gray-700">First Name *</label>
                 <input type="text" id="stud_first_name" name="stud_first_name" placeholder="First Name" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
+            <!-- Middle Name -->
             <div>
-                <label for="stud_middle_name" class="block text-sm font-medium text-gray-700">Middle Name</label>
+                <label for="stud_middle_name" class="block text-sm font-medium text-gray-700">Middle Name *</label>
                 <input type="text" id="stud_middle_name" name="stud_middle_name" placeholder="Middle Name" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
+            <!-- Last Name -->
             <div>
-                <label for="stud_last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
-                <input type="text" maxlength="11" id="stud_last_name" name="stud_last_name" placeholder="Last Name" required
+                <label for="stud_last_name" class="block text-sm font-medium text-gray-700">Last Name *</label>
+                <input type="text" id="stud_last_name" name="stud_last_name" placeholder="Last Name" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
+            <!-- Contact -->
             <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700">Contact</label>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Contact *</label>
                 <input type="text" id="phone" name="phone" placeholder="Contact" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
+            <!-- Address -->
             <div>
-                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <label for="address" class="block text-sm font-medium text-gray-700">Address *</label>
                 <input type="text" id="address" name="address" placeholder="Address" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
+            <!-- City -->
             <div>
-                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                <label for="city" class="block text-sm font-medium text-gray-700">City *</label>
                 <select id="city" name="city" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Please select city</option>
                     <option value="Manila">Manila</option>
-                    <option value="Manila">Parañaque</option>
+                    <option value="Parañaque">Parañaque</option>
                 </select>
             </div>
+            <!-- Grade Level -->
             <div>
-                <label for="grade_level" class="block text-sm font-medium text-gray-700">Grade Level:</label>
+                <label for="grade_level" class="block text-sm font-medium text-gray-700">Grade Level *</label>
                 <select id="grade_level" name="grade_level" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Please select grade level</option>
@@ -71,55 +77,60 @@
                     <option value="12">Grade 12</option>
                 </select>
             </div>
+            <!-- Desired Strand & Course -->
             <div>
-                <label for="strand" class="block text-sm font-medium text-gray-700">Desired Strand & Course:</label>
-                <select id="strand" name="strand"
+                <label for="strand" class="block text-sm font-medium text-gray-700">Desired Strand *</label>
+                <select id="strand" name="strand" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Select Strand</option>
                     <option value="ICT">ICT</option>
                 </select>
             </div>
             <div>
-                <select id="course" name="course"
+                <label for="course" class="block text-sm font-medium text-gray-700">Course *</label>
+                <select id="course" name="course" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Select course</option>
-                    <option value="">BS IN ENTREPRENEURSHIP</option>
-                    <option value="">BS IN COMPUTER SCIENCE</option>
+                    <option value="BS IN ENTREPRENEURSHIP">BS IN ENTREPRENEURSHIP</option>
+                    <option value="BS IN COMPUTER SCIENCE">BS IN COMPUTER SCIENCE</option>
                 </select>
             </div>
+            <!-- School Information -->
             <h3 class="text-2xl font-medium mb-2">School Information:</h3>
             <div>
-                <label for="school_name" class="block text-sm font-medium text-gray-700">School</label>
-                <select id="school_name" name="school_name"
+                <label for="school_name" class="block text-sm font-medium text-gray-700">School *</label>
+                <select id="school_name" name="school_name" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                     <option value="">Please select school</option>
                     <option value="AICS">AICS</option>
                 </select>
             </div>
+            <!-- Guardian Information -->
             <h3 class="text-2xl font-medium mb-2">Guardian Information:</h3>
             <div>
-                <label for="g_name" class="block text-sm font-medium text-gray-700">Guardian Name</label>
+                <label for="g_name" class="block text-sm font-medium text-gray-700">Guardian Name *</label>
                 <input type="text" id="g_name" name="g_name" placeholder="Guardian Name" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
             <div>
-                <label for="g_phone" class="block text-sm font-medium text-gray-700">Guardian Contact</label>
-                <input type="text" maxlength="11" id="g_phone" name="g_phone" placeholder="Guardian Contact" required
+                <label for="g_phone" class="block text-sm font-medium text-gray-700">Guardian Contact *</label>
+                <input type="text" id="g_phone" name="g_phone" placeholder="Guardian Contact" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
             <div>
-                <label for="g_relationship" class="block text-sm font-medium text-gray-700">Relationship with Guardian</label>
+                <label for="g_relationship" class="block text-sm font-medium text-gray-700">Relationship with Guardian *</label>
                 <input type="text" id="g_relationship" name="g_relationship" placeholder="Relationship with Guardian" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
+            <!-- Additional Information -->
             <h3 class="text-2xl font-medium mb-2">Additional Information:</h3>
             <div>
-                <label for="email_address" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="text" id="email_address" name="email_address" placeholder="Email Address" required
+                <label for="email_address" class="block text-sm font-medium text-gray-700">Email Address *</label>
+                <input type="email" id="email_address" name="email_address" placeholder="Email Address" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
             <div>
-                <label for="fbaccount" class="block text-sm font-medium text-gray-700">Facebook Account</label>
+                <label for="fbaccount" class="block text-sm font-medium text-gray-700">Facebook Account *</label>
                 <input type="text" id="fbaccount" name="fbaccount" placeholder="Facebook Account" required
                     class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
             </div>
@@ -134,3 +145,4 @@
 </body>
 
 </html>
+

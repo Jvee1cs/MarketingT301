@@ -3,22 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\School;
 
 class SchoolController extends Controller
 {
-    /**
-     * Store a newly created school record.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        $schools = School::all();
+        return view('schools.index', compact('schools'));
+    }
+
+    public function create()
+    {
+        return view('schools.create');
+    }
+
     public function store(Request $request)
     {
-        // Your logic to store the school record goes here
-        // For example:
-        // School::create($request->all());
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'required|string',
+            // Add more validation rules as needed
+        ]);
 
-        // Redirect to a suitable route after adding the record
-        return redirect()->back()->with('success', 'School record added successfully!');
+        School::create($request->all());
+
+        return redirect()->route('schools.index')
+            ->with('success', 'School created successfully');
+    }
+
+    public function show(School $school)
+    {
+        return view('schools.show', compact('school'));
+    }
+
+    public function edit(School $school)
+    {
+        return view('schools.edit', compact('school'));
+    }
+
+    public function update(Request $request, School $school)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'required|string',
+            // Add more validation rules as needed
+        ]);
+
+        $school->update($request->all());
+
+        return redirect()->route('schools.index')
+            ->with('success', 'School updated successfully');
+    }
+
+    public function destroy(School $school)
+    {
+        $school->delete();
+
+        return redirect()->route('schools.index')
+            ->with('success', 'School deleted successfully');
     }
 }
