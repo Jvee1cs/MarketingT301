@@ -55,8 +55,11 @@ $(document).ready(function() {
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">User Records</a></li>
         </ul>
         <div class="mt-auto py-4 px-4">
-            <a href="#" class="block py-2 px-4 bg-blue-900 hover:bg-blue-800 text-white rounded-md text-sm font-semibold text-center">Logout</a>
-        </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block py-2 px-4 bg-blue-900 hover:bg-blue-800 text-white rounded-md text-sm font-semibold text-center">Logout</a>
+</div>
 
     </aside>
     <!-- Main Content Section -->

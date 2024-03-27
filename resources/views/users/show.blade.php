@@ -28,6 +28,8 @@
                 <p class="card-text"><strong>Updated At:</strong> {{ $user->updated_at }}</p>
             </div>
         </div>
+    </br>
+        <a href="{{ route('users.index') }}" class="btn btn-primary">Back</a>
     </div>
 </body>
 </html>

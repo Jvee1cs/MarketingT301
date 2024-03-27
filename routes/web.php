@@ -16,26 +16,19 @@ use App\Http\Controllers\SchoolController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Apply middleware to a group of routes
+Route::middleware('auth')->group(function () {
+    // Routes that require authentication
 
-Route::get('/', function () {
-    return view('login/index');
-});
+    // Define routes for authenticated users
+    Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
+    // Add more authenticated routes here...
 // Route for showing the login form
-Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
 
-// Route for handling the login form submission
-Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
-
-// Route for showing the dashboard
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
-// Route for saving data
-Route::post('/admin/save', [AdminController::class, 'save'])->name('admin.save');
 // Define the route for registration
 Route::get('/student/register', [StudentController::class, 'showRegistrationForm'])->name('student.register');
 Route::post('/student/register', [StudentController::class, 'submitRegistrationForm'])->name('student.register.submit');
 // Define the logout route for admin
-Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 // Define the route for school records
 Route::get('/school/records', [SchoolController::class, 'index'])->name('school.records');
@@ -81,3 +74,16 @@ Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('school
 Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
 Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
 Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
+
+
+});
+// Route for handling the login and logout form submission
+Route::get('/admin/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/admin/login', [UserController::class, 'login']);
+Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/', function () {
+    return view('login/index');
+});
+

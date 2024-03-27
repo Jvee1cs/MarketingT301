@@ -13,7 +13,22 @@
         </div>
         <div class="p-8">
             <h1 class="text-2xl font-medium mb-8 text-center font-serif text-blue-900 font-medium" style="font-family: 'Roboto', sans-serif;">Marketing Login Panel</h1> <!-- Added font-medium and font-serif classes -->
-            <form method="post" action="{{ route('admin.login.submit') }}">
+            @if ($errors->any())
+                <div class="mb-4">
+                    <ul class="list-disc list-inside text-red-500">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <!-- Display session flash messages -->
+            @if(session('message'))
+                <div class="mb-4 text-red-500">{{ session('message') }}</div>
+            @endif
+
+            <form method="post" action="{{ route('login') }}">
                 @csrf
                 <div class="mb-4">
                     <label for="username" class="block text-blue-800 font-medium text-sm">Username:</label>
@@ -25,6 +40,7 @@
                 </div>
                 <button type="submit" class="font-medium text-sm w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">LOGIN</button>
             </form>
+            
         </div>
     </div>
 </body>

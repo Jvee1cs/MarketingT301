@@ -10,6 +10,8 @@
     <div class="container mx-auto p-8">
         <h1 class="text-3xl font-semibold mb-6 text-blue-900">School Records</h1>
         <a href="{{ route('schools.create') }}" class="inline-block mb-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Add New School</a>
+        <a href="{{ route('admin.dashboard') }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
+
         <table class="min-w-full bg-white rounded-lg overflow-hidden">
             <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
                 <tr>

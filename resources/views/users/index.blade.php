@@ -10,7 +10,10 @@
 <body class="bg-gray-100">
     <div class="container mx-auto p-8">
         <h1 class="text-3xl font-semibold mb-6 text-blue-900">User List</h1>
-        <a href="{{ route('users.create') }}" class="inline-block mb-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create New User</a>
+        <div class="mb-4">
+            <a href="{{ route('users.create') }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-2">Create New User</a>
+            <a href="{{ route('admin.dashboard') }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
+        </div>
         <table class="min-w-full bg-white rounded-lg overflow-hidden">
             <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
                 <tr>

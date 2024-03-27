@@ -27,10 +27,20 @@
                 <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
             </div>
             <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}">
+            </div>
+            <div class="form-group">
+                <label for="passowrd">PASSWORD_BCRYPT:</label>
+                <input type="text" class="form-control" id="password" name="password" value="{{ $user->password }}">
+            </div>
+            <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ route('users.index') }}" class="btn btn-primary">Back</a>
+
         </form>
     </div>
 </body>
