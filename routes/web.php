@@ -64,7 +64,13 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+
+
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+
 
 // Routes for displaying and managing School records
 Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');
@@ -76,12 +82,16 @@ Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('scho
 Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
 
 
+
 });
 // Route for handling the login and logout form submission
 Route::get('/admin/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [UserController::class, 'login']);
 Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
+
 
 Route::get('/', function () {
     return view('login/index');

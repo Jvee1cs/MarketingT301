@@ -11,9 +11,6 @@
         body {
             padding: 20px;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -22,25 +19,36 @@
         <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}">
+            <div class="form-group row">
+                <label for="username" class="col-sm-2 col-form-label">Username:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="passowrd">PASSWORD_BCRYPT:</label>
-                <input type="text" class="form-control" id="password" name="password" value="{{ $user->password }}">
+            <div class="form-group row">
+                <label for="password" class="col-sm-2 col-form-label">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password" value="">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ route('users.index') }}" class="btn btn-primary">Back</a>
-
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{ route('users.index') }}" class="btn btn-secondary">Back</a>
+                </div>
+            </div>
         </form>
     </div>
 </body>

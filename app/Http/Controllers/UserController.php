@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Add this line
 use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
 use App\Models\User;
-
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 class UserController extends Controller
 {
     use ValidatesRequests; // Add this line
@@ -65,7 +69,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'username' => 'required|unique:users', // Change 'email' to 'username'
-            'password' => 'required|min:5',
+            'password' => 'required',
         ]);
 
         // Hash the password before storing the user
@@ -117,6 +121,84 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index');
+        return response()->json(['message' => 'User deleted successfully']);
+    }
+
+    public function export(Request $request)
+{// Retrieve selected user IDs from the form
+    $selectedUserIds = $request->input('selected_users', []);
+
+    // Retrieve users based on the selected IDs
+    $users = User::whereIn('id', $selectedUserIds)->get();
+
+    // Create a new PDF instance
+    $pdf = new Dompdf();
+
+    // Set options for PDF rendering
+    $options = new Options();
+    $options->set('defaultFont', 'Arial');
+    $pdf->setOptions($options);
+
+    // Start buffering the output
+    ob_start();
+
+    // Begin PDF content
+    echo "<h1>User List</h1>";
+    echo "<table border='1' cellpadding='5'>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>";
+    foreach ($users as $user) {
+        echo "<tr>
+            <td>{$user->id}</td>
+            <td>{$user->name}</td>
+            <td>{$user->email}</td>
+            <td>{$user->created_at}</td>
+            <td>{$user->updated_at}</td>
+        </tr>";
+    }
+    echo "</table>";
+
+    // End buffering and assign the content to a variable
+    $html = ob_get_clean();
+
+    // Load HTML content into the PDF
+    $pdf->loadHtml($html);
+
+    // Set paper size and orientation
+    $pdf->setPaper('A4', 'portrait');
+
+    // Render the PDF
+    $pdf->render();
+
+    // Output the PDF to the browser
+    return $pdf->stream('users.pdf');
+}
+
+public function bulkDelete(Request $request)
+    {
+        // Retrieve selected user IDs from the request
+        $selectedUserIds = $request->input('selected_users');
+
+        // Validate if selected user IDs are present
+        if (!is_array($selectedUserIds) || empty($selectedUserIds)) {
+            return redirect()->back()->with('error', 'No users selected for deletion.');
+        }
+
+        try {
+            // Delete selected users
+            User::whereIn('id', $selectedUserIds)->delete();
+            
+            // Redirect with success message
+            return redirect()->back()->with('success', 'Selected users deleted successfully.');
+        } catch (\Exception $e) {
+            // Redirect with error message if deletion fails
+            return redirect()->back()->with('error', 'Error deleting selected users. Please try again.');
+        }
     }
 }
+
