@@ -50,11 +50,32 @@ class UserController extends Controller
     }
 
     // Index method for displaying all users
-    public function index()
-    {
-        $users = User::all();
-        return view('users.index', compact('users'));
+    // Index method for displaying all users with search functionality
+public function index(Request $request)
+{
+    // Retrieve the search query from the request
+    $searchQuery = $request->input('search');
+
+    // Query users and filter based on the search query
+    $usersQuery = User::query();
+
+    if ($searchQuery) {
+        $usersQuery->where('name', 'like', '%' . $searchQuery . '%')
+                   ->orWhere('username', 'like', '%' . $searchQuery . '%')
+                   ->orWhere('email', 'like', '%' . $searchQuery . '%');
     }
+
+    // Retrieve filtered users and sort them alphabetically by name
+    $users = $usersQuery->orderBy('name')->get();
+
+    // Retrieve all users if there's no search query provided
+    if (!$searchQuery) {
+        $users = User::all();
+    }
+
+    return view('users.index', compact('users'));
+}
+
 
     // Create method for displaying the form to create a new user
     public function create()
@@ -140,29 +161,31 @@ class UserController extends Controller
     $pdf->setOptions($options);
 
     // Start buffering the output
-    ob_start();
-
     // Begin PDF content
-    echo "<h1>User List</h1>";
-    echo "<table border='1' cellpadding='5'>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created At</th>
-            <th>Updated At</th>
-        </tr>";
-    foreach ($users as $user) {
-        echo "<tr>
-            <td>{$user->id}</td>
-            <td>{$user->name}</td>
-            <td>{$user->email}</td>
-            <td>{$user->created_at}</td>
-            <td>{$user->updated_at}</td>
-        </tr>";
-    }
-    echo "</table>";
+echo "<h1>User List</h1>";
+echo "<table border='1' cellpadding='5'>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+    </tr>";
 
+foreach ($users as $user) {
+    echo "<tr>
+        <td>{$user->id}</td>
+        <td>{$user->name}</td>
+        <td>{$user->username}</td>
+        <td>{$user->password}</td>
+        <td>{$user->email}</td>
+        <td>{$user->created_at}</td>
+        <td>{$user->updated_at}</td>
+    </tr>";
+}
+echo "</table>";
     // End buffering and assign the content to a variable
     $html = ob_get_clean();
 
@@ -170,7 +193,7 @@ class UserController extends Controller
     $pdf->loadHtml($html);
 
     // Set paper size and orientation
-    $pdf->setPaper('A4', 'portrait');
+    $pdf->setPaper('A4', 'landscape');
 
     // Render the PDF
     $pdf->render();
@@ -181,24 +204,14 @@ class UserController extends Controller
 
 public function bulkDelete(Request $request)
     {
-        // Retrieve selected user IDs from the request
-        $selectedUserIds = $request->input('selected_users');
+        $userIds = $request->input('user_ids');
 
-        // Validate if selected user IDs are present
-        if (!is_array($selectedUserIds) || empty($selectedUserIds)) {
-            return redirect()->back()->with('error', 'No users selected for deletion.');
-        }
+        // Perform validation if needed
 
-        try {
-            // Delete selected users
-            User::whereIn('id', $selectedUserIds)->delete();
-            
-            // Redirect with success message
-            return redirect()->back()->with('success', 'Selected users deleted successfully.');
-        } catch (\Exception $e) {
-            // Redirect with error message if deletion fails
-            return redirect()->back()->with('error', 'Error deleting selected users. Please try again.');
-        }
+        User::whereIn('id', $userIds)->delete();
+
+        return response()->json(['message' => 'Users deleted successfully'], 200);
     }
+    
 }
 

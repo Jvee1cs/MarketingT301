@@ -65,8 +65,9 @@ Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
-Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+Route::post('/users/bulk-delete',  [UserController::class, 'bulkDelete'])->name('users.bulk-delete');
 
+Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
 
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
@@ -90,7 +91,6 @@ Route::post('/admin/login', [UserController::class, 'login']);
 Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
 
 
 Route::get('/', function () {
