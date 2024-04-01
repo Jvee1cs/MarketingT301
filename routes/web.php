@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\TargetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,9 @@ Route::get('/admin/login', [UserController::class, 'showLoginForm'])->name('logi
 Route::post('/admin/login', [UserController::class, 'login']);
 Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+// routes/web.php
+Route::get('/schools', [TargetController::class, 'target'])->name('schools.target');
 
 
 

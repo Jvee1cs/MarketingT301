@@ -99,11 +99,13 @@
             <h3 class="text-2xl font-medium mb-2">School Information:</h3>
             <div>
                 <label for="school_name" class="block text-sm font-medium text-gray-700">School *</label>
-                <select id="school_name" name="school_name" required
-                    class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
-                    <option value="">Please select school</option>
-                    <option value="AICS">AICS</option>
-                </select>
+              <!-- form.blade.php -->
+              <form id="add-option-form" action="{{ route('options.store') }}" method="post">
+                @csrf
+                <input type="text" name="name" placeholder="Enter new option">
+                <button type="submit">Add Option</button>
+            </form>
+
             </div>
             <!-- Guardian Information -->
             <h3 class="text-2xl font-medium mb-2">Guardian Information:</h3>
