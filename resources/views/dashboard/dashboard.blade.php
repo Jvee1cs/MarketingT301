@@ -53,6 +53,7 @@ $(document).ready(function() {
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">Student Records</a></li>
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">School Records</a></li>
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">User Records</a></li>
+            <li><a href="{{ route('notifications.index') }}" class="block py-2 px-4 hover:bg-blue-800">Notification</a></li>
         </ul>
         <div class="mt-auto py-4 px-4">
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -64,7 +65,7 @@ $(document).ready(function() {
     </aside>
     <!-- Main Content Section -->
     <main class="flex-1 p-10">
-        <div class="shadow-lg p-6 bg-white rounded-lg text-white py-4">
+        <div class="container mx-auto px-6 py-4">
             <h1 class="text-3xl font-semibold mb-4 text-center text-blue-900">Marketing Dashboard</h1>
             <p class="text-sm font-medium text-center mb-8 text-gray-600">here, you can manage your student records, school records, and user records.</p>
         </div>

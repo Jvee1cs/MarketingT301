@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
-
+use App\Models\School;
 class StudentController extends Controller
 {
     /**
@@ -35,7 +35,9 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        // Fetch all school names from the database
+        $schools = School::pluck('name', 'id');
+        return view('students.create', compact('schools'));
     }
 
     /**
@@ -95,6 +97,18 @@ class StudentController extends Controller
             'stud_first_name' => 'required|string',
             'stud_last_name' => 'required|string',
             'stud_middle_name' => 'required|string',
+            'phone' => 'required|string|max:11',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'grade_level' => 'required|integer',
+            'strand' => 'required|string',
+            'course' => 'required|string',
+            'school_name' => 'required|string',
+            'g_name' => 'required|string',
+            'g_phone' => 'required|string|max:11',
+            'g_relationship' => 'required|string',
+            'email_address' => 'required|string|email',
+            'fbaccount' => 'required|string',
             
         ]);
 

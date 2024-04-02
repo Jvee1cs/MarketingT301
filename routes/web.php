@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
 
+use App\Http\Controllers\NotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +95,13 @@ Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.log
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
+Route::post('/notifications/update', [NotificationController::class, 'updateThreshold'])->name('notifications.update');
+
+Route::get('/notifications/settings', function () {
+    return view('notifications.settings');
+})->name('notifications.settings');
 
 Route::get('/', function () {
     return view('login/index');

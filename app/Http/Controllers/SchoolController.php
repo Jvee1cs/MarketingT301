@@ -17,6 +17,7 @@ class SchoolController extends Controller
     {
         return view('schools.create');
     }
+    
 
     public function store(Request $request)
     {
