@@ -81,8 +81,10 @@ $(document).ready(function() {
                 <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">School Record</h2>
                 <p class="text-gray-600 mb-6 text-gray-100">View and manage School records.</p>
                 <a href="{{ route('school.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Go to School Records</a>
-                                <a href="{{ route('schools.target') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Go to Target School</a>
-
+                <form action="{{ route('school.add') }}" method="post">
+                    @csrf
+                    <button type="submit" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block w-full">Add Target School</button>
+                </form>
             </div>
             <!-- User Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
