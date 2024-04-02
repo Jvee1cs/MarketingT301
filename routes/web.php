@@ -81,6 +81,7 @@ Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('school
 Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
 Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
 Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
+Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
 
 
 
