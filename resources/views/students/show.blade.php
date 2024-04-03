@@ -9,16 +9,16 @@
 <body class="bg-gray-100">
     <div class="container mx-auto p-8">
         <h1 class="text-3xl font-semibold mb-6 text-blue-900">{{ $student->stud_first_name }} {{ $student->stud_last_name }}</h1>
-        <div class="grid grid-cols-2 gap-4">
-            <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="col-span-1 md:col-span-2 lg:col-span-1">
                 <p class="text-lg font-bold mb-2">First Name:</p>
                 <p class="text-gray-700">{{ $student->stud_first_name }}</p>
             </div>
-            <div>
+            <div class="col-span-1 md:col-span-1 lg:col-span-1">
                 <p class="text-lg font-bold mb-2">Last Name:</p>
                 <p class="text-gray-700">{{ $student->stud_last_name }}</p>
             </div>
-            <div>
+            <div class="col-span-1">
                 <p class="text-lg font-bold mb-2">Middle Name:</p>
                 <p class="text-gray-700">{{ $student->stud_middle_name }}</p>
             </div>

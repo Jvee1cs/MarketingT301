@@ -9,25 +9,25 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-semibold mb-6 text-blue-900">User List</h1>
-        <div class="mb-4">
-    <a href="{{ route('users.create') }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-2">Create New User</a>
-    <a href="{{ route('admin.dashboard') }}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
-    <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded ml-2">Export Selected Data</button>
-    <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded ml-2">Delete Selected</button>
-    
-    <form action="{{ route('users.index') }}" method="GET" id="userSearchForm" class="inline-block font-bold py-2 px-16 rounded">
-        @csrf
-        <input type="text" name="search" placeholder="Search..." class="input-search border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-4 py-2 mr-2">
-        <button type="submit" class="btn-search bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Search</button>
-    </form>
-</div>
+    <div class="container mx-auto p-4 md:p-8">
+        <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">User List</h1>
+        <div class="mb-4 flex flex-wrap justify-between items-center">
+            <a href="{{ route('users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Create New User</a>
+            <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
+            <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected Data</button>
+            <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete Selected</button>
+            <form action="{{ route('users.index') }}" method="GET" id="userSearchForm" class="flex items-center">
+                @csrf
+                <input type="text" name="search" placeholder="Search..." class="input-search border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-4 py-2 mr-2">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Search</button>
+            </form>
+        </div>
 
         <form action="{{ route('users.export') }}" method="POST" id="userForm">
             @csrf
+            <div class="overflow-x-auto">
             <table class="min-w-full bg-white rounded-lg overflow-hidden">
-                <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                <thead class="min-w-full bg-white rounded-lg overflow-hidden">
                     <tr>
                         <th class="py-3 px-6 text-left">
                             <label for="selectAll" class="inline-block">
@@ -63,7 +63,13 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </form>
+         <!-- Pagination links -->
+         <div class="mt-4">
+            {{ $users->links() }}
+        </div>
+   
     </div>
 
     <!-- User Details Modal -->
@@ -76,128 +82,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-   // Function to toggle checkbox state and handle row click
-   function toggleCheckboxAndRow(event) {
-        var checkbox = event.target.closest('tr').querySelector('input[type="checkbox"]');
-        checkbox.checked = !checkbox.checked;
-    }
-
-    // Event listener for row clicks
-    document.querySelectorAll('tbody tr').forEach(function(row) {
-        row.addEventListener('click', function(event) {
-            // Check if the click was not on an anchor tag to avoid interfering with link clicks
-            if (event.target.tagName !== 'A') {
-                toggleCheckboxAndRow(event);
-            }
-        });
-    });
-
-    // Event listener for checkbox clicks
-    document.querySelectorAll('tbody tr input[type="checkbox"]').forEach(function(checkbox) {
-        checkbox.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent row click event from triggering
-        });
-    });
-
-    // Event listener for Select All checkbox
-    document.getElementById('selectAll').addEventListener('change', function() {
-        var checkboxes = document.getElementsByName('selected_users[]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = document.getElementById('selectAll').checked;
-        });
-    });
-    document.querySelectorAll('.view-details').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            var userId = link.getAttribute('data-id');
-            fetch('/users/' + userId)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('userDetailsContent').innerHTML = data;
-                    document.getElementById('userDetailsModal').classList.remove('hidden');
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    });
-
-    document.getElementById('deleteSelected').addEventListener('click', function() {
-        var selectedUsers = document.querySelectorAll('input[name="selected_users[]"]:checked');
-        var userIds = [];
-        selectedUsers.forEach(function(checkbox) {
-            userIds.push(checkbox.value);
-        });
-
-        if (userIds.length > 0 && confirm('Are you sure you want to delete selected users?')) {
-            fetch('/users/bulk-delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ user_ids: userIds })
-            })
-            .then(response => {
-                if (response.ok) {
-                    location.reload();
-                } else {
-                    console.error('Error:', response.statusText);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        } else {
-            alert('Please select at least one user to delete.');
-        }
-    });
-
-    document.querySelectorAll('.edit-details').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            var userId = link.getAttribute('data-id');
-            fetch('/users/' + userId + '/edit')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('userDetailsContent').innerHTML = data;
-                    document.getElementById('userDetailsModal').classList.remove('hidden');
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    });
-
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('userDetailsModal').classList.add('hidden');
-    });
-
-    document.getElementById('exportButton').addEventListener('click', function() {
-        document.getElementById('userForm').submit();
-    });
-
-    document.querySelectorAll('.delete-user').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-            var userId = button.getAttribute('data-id');
-            if (confirm('Are you sure you want to delete this user?')) {
-                fetch('/users/' + userId, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Reload the page or update the user list
-                        location.reload();
-                    } else {
-                        console.error('Error:', response.statusText);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            }
-        });
-    });
-</script>
+    <script src="{{ asset('js/User/User.js') }}"></script>
 
 
 </body>
