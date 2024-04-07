@@ -81,9 +81,10 @@ Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store
 Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
 Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
 Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
-Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
 Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
-
+Route::post('/schools/bulk-delete',  [SchoolController::class, 'bulkDelete'])->name('schools.bulk-delete');
+Route::post('/schools/export', [SchoolController::class, 'export'])->name('schools.export');
+Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
 // IPASOK MO DITO PARA MAPASOK

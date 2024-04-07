@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4 md:p-8">
-        <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">student List</h1>
+        <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Student List</h1>
         <div class="mb-4 flex flex-wrap justify-between items-center">
             <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Create New student</a>
             <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
@@ -76,7 +76,7 @@
     <div id="studentDetailsModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 hidden">
         <div class="flex items-center justify-center h-full">
             <div class="bg-white p-8 rounded shadow-lg">
-                <h2 class="text-2xl font-semibold mb-4 text-gray-900">student Details</h2>
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900">Student Details</h2>
                 <div id="studentDetailsContent"></div>
                 <button id="closeModal" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Close</button>
             </div>
