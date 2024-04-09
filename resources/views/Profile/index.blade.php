@@ -11,8 +11,8 @@
         <div>
             <dl>
                 <div>
-                    <dt>ID</dt>
-                    <dd>{{ Auth::user()->id }}</dd>
+                    <dt>ROLE</dt>
+                    <dd>{{ Auth::user()->role }}</dd>
                 </div>
                 <div>
                     <dt>Name</dt>

@@ -92,6 +92,7 @@ public function index(Request $request)
             'name' => 'required',
             'username' => 'required|unique:users', // Change 'email' to 'username'
             'password' => 'required',
+            'role' => 'required|in:user,admin',
         ]);
 
         // Hash the password before storing the user

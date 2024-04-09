@@ -19,27 +19,72 @@ use App\Http\Controllers\NotificationController;
 |
 */
 // Apply middleware to a group of routes
+
+// Routes accessible only to Admin
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Define routes accessible only to Admin
+    // For example:
+    Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
+    // Add more routes accessible only to Admin here...
+    // Define the route for school records
+Route::get('/school/records', [SchoolController::class, 'index'])->name('school.records');
+// Define the route for adding school records
+Route::post('/school/add', [SchoolController::class, 'store'])->name('school.add');
+// Routes for displaying and managing School records
+Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');
+Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
+Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store');
+Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
+Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
+Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
+Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
+Route::post('/schools/bulk-delete',  [SchoolController::class, 'bulkDelete'])->name('schools.bulk-delete');
+Route::post('/schools/export', [SchoolController::class, 'export'])->name('schools.export');
+Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
+
+// Define the route for user records
+
+// Route for adding user records
+Route::post('/user/add', [UserController::class, 'store'])->name('user.add');
+
+// Routes for displaying and managing users records
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/user/records', [UserController::class, 'index'])->name('user.records');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::post('/users/bulk-delete',  [UserController::class, 'bulkDelete'])->name('users.bulk-delete');
+Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+
+
+});
+
+// Routes accessible only to User
+Route::middleware(['auth', 'user'])->group(function () {
+    // Define routes accessible only to User
+    // Add more routes accessible only to User here...
+    Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
+});
+
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
 
     // Define routes for authenticated users
     Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
     // Add more authenticated routes here...
-// Route for showing the login form
+
 
 // Define the route for registration
 Route::get('/student/register', [StudentController::class, 'showRegistrationForm'])->name('student.register');
 Route::post('/student/register', [StudentController::class, 'submitRegistrationForm'])->name('student.register.submit');
 // Define the logout route for admin
-
-// Define the route for school records
-Route::get('/school/records', [SchoolController::class, 'index'])->name('school.records');
-// Define the route for adding school records
-Route::post('/school/add', [SchoolController::class, 'store'])->name('school.add');
-// Define the route for user records
-
-// Route for adding user records
-Route::post('/user/add', [UserController::class, 'store'])->name('user.add');
 
 Route::get('/student', [StudentController::class, 'registration'])->name('student.registration');
 Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
@@ -59,34 +104,9 @@ Route::post('/students/bulk-delete',  [StudentController::class, 'bulkDelete'])-
 Route::post('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 
-// Routes for displaying and managing users records
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/user/records', [UserController::class, 'index'])->name('user.records');
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
-Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-Route::post('/users/bulk-delete',  [UserController::class, 'bulkDelete'])->name('users.bulk-delete');
-Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-
-
-
-// Routes for displaying and managing School records
-Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');
-Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
-Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store');
-Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
-Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
-Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
-Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
-Route::post('/schools/bulk-delete',  [SchoolController::class, 'bulkDelete'])->name('schools.bulk-delete');
-Route::post('/schools/export', [SchoolController::class, 'export'])->name('schools.export');
-Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 // IPASOK MO DITO PARA MAPASOK
 
@@ -111,3 +131,9 @@ Route::get('/', function () {
     return view('login/index');
 });
 
+
+
+// Route to fetch flash messages
+Route::get('/get_flash_messages', function () {
+    return response()->json(['message' => session('message')]);
+});
