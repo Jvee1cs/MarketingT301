@@ -7,6 +7,12 @@
     <title>school List</title>
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+
+        h1.text-shadow {
+            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4 md:p-8">
