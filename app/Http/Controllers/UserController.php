@@ -214,5 +214,12 @@ public function bulkDelete(Request $request)
         return response()->json(['message' => 'Users deleted successfully'], 200);
     }
     
+    
+
+public function profile()
+    {
+        $users = User::all(); // USING User MODEL and make as variable users
+        return view('Profile.index', compact('users')); // 
+    }    
 }
 

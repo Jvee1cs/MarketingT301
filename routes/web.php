@@ -71,6 +71,7 @@ Route::put('/users/{user}', [UserController::class, 'update'])->name('users.upda
 Route::post('/users/bulk-delete',  [UserController::class, 'bulkDelete'])->name('users.bulk-delete');
 Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 
 

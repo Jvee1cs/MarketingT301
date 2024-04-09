@@ -50,9 +50,10 @@ $(document).ready(function() {
         </div>
         <ul class="mt-1 text-white">
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">Dashboard</a></li>
+            <li><a href="{{ route('profile') }}" class="block py-2 px-4 hover:bg-blue-800">Profile</a></li>
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">Student Records</a></li>
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">School Records</a></li>
-            <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">User Records</a></li>
+            <li><a href="" class="block py-2 px-4 hover:bg-blue-800">User Records</a></li>
             <li><a href="{{ route('notifications.index') }}" class="block py-2 px-4 hover:bg-blue-800">Notification</a></li>
         </ul>
         <div class="mt-auto py-4 px-4">
