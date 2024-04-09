@@ -33,11 +33,18 @@
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
+            <!-- Role selection dropdown -->
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select class="form-control" id="role" name="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <!-- End of role selection dropdown -->
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="{{ route('users.index') }}" class="btn btn-primary">Back</a>
- 
         </form>
-        
     </div>
 </body>
 </html>

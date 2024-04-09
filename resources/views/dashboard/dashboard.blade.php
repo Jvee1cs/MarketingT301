@@ -50,9 +50,10 @@ $(document).ready(function() {
         </div>
         <ul class="mt-1 text-white">
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">Dashboard</a></li>
+            <li><a href="{{ route('profile') }}" class="block py-2 px-4 hover:bg-blue-800">Profile</a></li>
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">Student Records</a></li>
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">School Records</a></li>
-            <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">User Records</a></li>
+            <li><a href="" class="block py-2 px-4 hover:bg-blue-800">User Records</a></li>
             <li><a href="{{ route('notifications.index') }}" class="block py-2 px-4 hover:bg-blue-800">Notification</a></li>
         </ul>
         <div class="mt-auto py-4 px-4">
@@ -64,8 +65,25 @@ $(document).ready(function() {
 
     </aside>
     <!-- Main Content Section -->
+    
     <main class="flex-1 p-10">
+        
         <div class="container mx-auto px-6 py-4">
+        @if ($errors->any())
+                <div class="mb-4">
+                    <ul class="list-disc text-center list-inside text-red-500">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <!-- Display session flash messages -->
+            @if(session('message'))
+                <div class="mb-4 text-center text-red-500">{{ session('message') }}</div>
+            @endif
+
             <h1 class="text-3xl font-semibold mb-4 text-center text-blue-900">Marketing Dashboard</h1>
             <p class="text-sm font-medium text-center mb-8 text-gray-600">here, you can manage your student records, school records, and user records.</p>
         </div>

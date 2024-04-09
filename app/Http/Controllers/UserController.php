@@ -92,6 +92,7 @@ public function index(Request $request)
             'name' => 'required',
             'username' => 'required|unique:users', // Change 'email' to 'username'
             'password' => 'required',
+            'role' => 'required|in:user,admin',
         ]);
 
         // Hash the password before storing the user
@@ -214,5 +215,12 @@ public function bulkDelete(Request $request)
         return response()->json(['message' => 'Users deleted successfully'], 200);
     }
     
+    
+
+public function profile()
+    {
+        $users = User::all(); // USING User MODEL and make as variable users
+        return view('Profile.index', compact('users')); // 
+    }    
 }
 
