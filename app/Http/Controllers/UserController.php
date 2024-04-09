@@ -53,6 +53,7 @@ class UserController extends Controller
     // Index method for displaying all users with search functionality
 public function index(Request $request)
 {
+    
     // Retrieve the search query from the request
     $searchQuery = $request->input('search');
 
@@ -72,7 +73,7 @@ public function index(Request $request)
     if (!$searchQuery) {
         $users = User::all();
     }
-
+    $users = User::paginate(10); // 10 users per page
     return view('users.index', compact('users'));
 }
 

@@ -5,7 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
-use App\Http\Controllers\TargetController;
+
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +54,10 @@ Route::get('/students/create', [StudentController::class, 'create'])->name('stud
 Route::post('/students/store', [StudentController::class, 'store'])->name('students.store');
 Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
 Route::put('/students/{id}/update', [StudentController::class, 'update'])->name('students.update');
-Route::delete('/students/{id}/delete', [StudentController::class, 'destroy'])->name('students.destroy');
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
+Route::post('/students/bulk-delete',  [StudentController::class, 'bulkDelete'])->name('students.bulk-delete');
+Route::post('/students/export', [StudentController::class, 'export'])->name('students.export');
+Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 
 // Routes for displaying and managing users records
 
@@ -65,11 +68,8 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-
 Route::post('/users/bulk-delete',  [UserController::class, 'bulkDelete'])->name('users.bulk-delete');
-
 Route::post('/users/export', [UserController::class, 'export'])->name('users.export');
-
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
@@ -81,7 +81,13 @@ Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store
 Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
 Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
 Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
+Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
+Route::post('/schools/bulk-delete',  [SchoolController::class, 'bulkDelete'])->name('schools.bulk-delete');
+Route::post('/schools/export', [SchoolController::class, 'export'])->name('schools.export');
 Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
+// IPASOK MO DITO PARA MAPASOK
 
 
 
@@ -92,10 +98,13 @@ Route::post('/admin/login', [UserController::class, 'login']);
 Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-// routes/web.php
-Route::get('/schools', [TargetController::class, 'target'])->name('schools.target');
 
 
+Route::post('/notifications/update', [NotificationController::class, 'updateThreshold'])->name('notifications.update');
+
+Route::get('/notifications/settings', function () {
+    return view('notifications.settings');
+})->name('notifications.settings');
 
 Route::get('/', function () {
     return view('login/index');
