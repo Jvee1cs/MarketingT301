@@ -89,16 +89,20 @@ $(document).ready(function() {
         </div>
 
         <div class="flex flex-col md:flex-row md:justify-center mt-10 gap-10 ">
+       
             <!-- Student Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
                 <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">Student Record</h2>
-                <p class="text-gray-600 mb-6 text-gray-100">View and manage Student records.</p>
-                <a href="{{ route('students.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center">Go to Student Records</a>
+                <p class="text-gray-600 mb-6 text-gray-100 text-center">View Student records.</p>
+                <a href="{{ route('students.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Go to Student Records</a>
+                 <a href="{{ route('aics.gen') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Generate Form Link</a>
+                
             </div>
+           
             <!-- School Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
                 <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">School Record</h2>
-                <p class="text-gray-600 mb-6 text-gray-100">View and manage School records.</p>
+                <p class="text-gray-600 mb-6 text-gray-100 text-center">View School records.</p>
                 <a href="{{ route('school.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Go to School Records</a>
                  <a href="{{ route('schools.create') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Add Target School</a>
                 
@@ -106,7 +110,7 @@ $(document).ready(function() {
             <!-- User Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
                 <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">User Record</h2>
-                <p class="text-gray-600 mb-6 text-gray-100">View and manage user records.</p>
+                <p class="text-gray-600 mb-6 text-gray-100 text-center">View user records.</p>
                 <a href="{{ route('user.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center block mb-4">Go to User Records</a>
                 <a href="{{ route('users.create') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Add Login Record</a>
 

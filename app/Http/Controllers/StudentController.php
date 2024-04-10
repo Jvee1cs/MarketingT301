@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\School;
-
+use Illuminate\Support\Str; // Add this line
 use Illuminate\Support\Facades\Auth; // Add this line
 use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
 use App\Exports\StudentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use QrCode;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 class StudentController extends Controller
@@ -20,6 +21,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $students = Student::all();

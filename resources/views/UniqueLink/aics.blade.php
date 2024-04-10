@@ -25,7 +25,7 @@
         </div>
         @endif
         <!-- Form -->
-        <form method="post" action="{{route('students.store')}}" class="space-y-4">
+        <form method="post" action="{{route('aics.store')}}" class="space-y-4">
             @csrf
             <!-- Input fields -->
             <!-- First Name -->

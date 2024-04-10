@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\LinkController;
 
 use App\Http\Controllers\NotificationController;
 
@@ -76,23 +77,20 @@ Route::middleware(['auth', 'user'])->group(function () {
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
 
-    // Define routes for authenticated users
-    Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
-    // Add more authenticated routes here...
-
-
+ // Define routes for authenticated users
+ Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
+ // Add more authenticated routes here...
 // Define the route for registration
 Route::get('/student/register', [StudentController::class, 'showRegistrationForm'])->name('student.register');
 Route::post('/student/register', [StudentController::class, 'submitRegistrationForm'])->name('student.register.submit');
 // Define the logout route for admin
 
 Route::get('/student', [StudentController::class, 'registration'])->name('student.registration');
-Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
+
 Route::post('/student', [StudentController::class, 'store'])->name('student.store');
 // Route for displaying the form to edit a student
 
 // Routes for displaying and managing student records
-
 Route::get('/students/records', [StudentController::class, 'index'])->name('students.records');
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
@@ -104,12 +102,22 @@ Route::post('/students/bulk-delete',  [StudentController::class, 'bulkDelete'])-
 Route::post('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 
-
+// Define the route for generating a unique link
+Route::get('/generate', [LinkController::class, 'generateLink'])->name('generate.link');
+Route::post('/update-expiration/{uniqueIdentifier}', [LinkController::class, 'updateExpiration'])->middleware('validate.unique.link')->name('update.expiration');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::post('/notifications/update', [NotificationController::class, 'updateThreshold'])->name('notifications.update');
+Route::get('/notifications/settings', function () {
+    return view('notifications.settings');
+})->name('notifications.settings');
+Route::post('/toggle-link/{uniqueIdentifier}', [LinkController::class, 'toggleActivation'])->name('toggle.link');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-// IPASOK MO DITO PARA MAPASOK
 
+// Define the route for creating students with a unique link
+
+// Route for the page to generate links
+Route::get('/generate-link', [LinkController::class, 'generateLinkPage'])->name('aics.gen');
 
 
 });
@@ -119,21 +127,38 @@ Route::post('/admin/login', [UserController::class, 'login']);
 Route::post('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-
-
-Route::post('/notifications/update', [NotificationController::class, 'updateThreshold'])->name('notifications.update');
-
-Route::get('/notifications/settings', function () {
-    return view('notifications.settings');
-})->name('notifications.settings');
-
 Route::get('/', function () {
     return view('login/index');
 });
-
 
 
 // Route to fetch flash messages
 Route::get('/get_flash_messages', function () {
     return response()->json(['message' => session('message')]);
 });
+
+Route::middleware('web')->group(function () {
+    
+
+    // Define the route for creating students with a unique link
+    Route::get('/aics/{uniqueIdentifier}', [LinkController::class, 'create'])
+        ->middleware('validate.unique.link')
+        ->name('aics.create.unique');
+// Define the route for storing students
+Route::post('/aics/store', [LinkController::class, 'store'])
+->name('aics.store');
+
+        Route::get('/success', function () {
+            return view('/UniqueLink/success');
+        })->name('success');
+        Route::get('/already-submitted', function () {
+            return view('/UniqueLink/already');
+        })->name('already.create');
+});
+
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+ 
+ // Define the route for the success page
