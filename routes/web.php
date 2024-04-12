@@ -102,23 +102,25 @@ Route::post('/students/bulk-delete',  [StudentController::class, 'bulkDelete'])-
 Route::post('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 
-// Define the route for generating a unique link
-Route::get('/generate', [LinkController::class, 'generateLink'])->name('generate.link');
-Route::post('/update-expiration/{uniqueIdentifier}', [LinkController::class, 'updateExpiration'])->middleware('validate.unique.link')->name('update.expiration');
+
+
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 Route::post('/notifications/update', [NotificationController::class, 'updateThreshold'])->name('notifications.update');
 Route::get('/notifications/settings', function () {
     return view('notifications.settings');
 })->name('notifications.settings');
-Route::post('/toggle-link/{uniqueIdentifier}', [LinkController::class, 'toggleActivation'])->name('toggle.link');
+
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-
-// Define the route for creating students with a unique link
-
+// Define the route for generating a unique link
 // Route for the page to generate links
 Route::get('/generate-link', [LinkController::class, 'generateLinkPage'])->name('aics.gen');
-
+Route::get('/generate', [LinkController::class, 'generateLink'])->name('generate.link');
+Route::post('/toggle-link/{uniqueIdentifier}', [LinkController::class, 'toggleActivation'])->name('toggle.activation');
+Route::get('/links', [LinkController::class, 'manageLinks'])->name('manage.links');
+Route::post('/links/delete-expired', [LinkController::class, 'deleteExpiredLinks'])->name('links.delete.expired');
+Route::post('/links/{uniqueIdentifier}/edit-expiration', [LinkController::class, 'editExpiration'])->name('links.edit.expiration');
+Route::delete('/links/{link}', [LinkController::class, 'delete'])->name('links.delete');
 
 });
 // Route for handling the login and logout form submission

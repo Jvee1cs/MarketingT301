@@ -95,7 +95,7 @@ $(document).ready(function() {
                 <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">Student Record</h2>
                 <p class="text-gray-600 mb-6 text-gray-100 text-center">View Student records.</p>
                 <a href="{{ route('students.records') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Go to Student Records</a>
-                 <a href="{{ route('aics.gen') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Generate Form Link</a>
+                 <a href="{{ route('manage.links') }}" class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Generate Form Link</a>
                 
             </div>
            
