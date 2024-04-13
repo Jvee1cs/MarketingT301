@@ -1,42 +1,32 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Notifications\StudentCreatedNotification;
 use Illuminate\Http\Request;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
     public function index()
     {
-        $notifications = Notification::all(); // Assuming you want to display all notifications
+        $notifications = Auth::user()->notifications()->paginate(10);
         return view('notifications.index', compact('notifications'));
     }
 
-    public function settings()
-{
-    $notif = Notification::first(); // Fetch the notification
-    return view('notifications.settings', compact('notification'));
-}
-
-
-    public function updateThreshold(Request $request)
+    public function markAsRead($notificationId)
     {
-        $request->validate([
-            'threshold' => 'required|numeric|min:1', // Assuming threshold is in days or hours
-        ]);
-    
-        $notification = Notification::first(); // Assuming you have only one notification setting
-    
-        if ($notification) {
-            $notification->update([
-                'threshold_days' => $request->threshold, // or threshold_hours, depending on your implementation
-            ]);
-    
-            return response()->json(['success' => true, 'message' => 'Notification threshold updated successfully.']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'No notification settings found.']);
-        }
+        $notification = Auth::user()->notifications()->findOrFail($notificationId);
+        $notification->markAsRead();
+
+        return redirect()->back()->with('success', 'Notification marked as read.');
     }
-    
+
+    public function destroy($notificationId)
+    {
+        $notification = Auth::user()->notifications()->findOrFail($notificationId);
+        $notification->delete();
+
+        return redirect()->back()->with('success', 'Notification deleted.');
+    }
 }

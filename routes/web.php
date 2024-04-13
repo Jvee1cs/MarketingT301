@@ -76,6 +76,11 @@ Route::middleware(['auth', 'user'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
+    
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::delete('/notifications/{notificationId}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    Route::put('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+
 
  // Define routes for authenticated users
  Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
@@ -163,4 +168,4 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
  
- // Define the route for the success page
+ 

@@ -52,7 +52,7 @@
             </table>
         </div>
         <!-- Back Button -->
-        <a href="#" class="mt-8 inline-block px-4 py-2 bg-blue-800 text-white font-semibold rounded hover:bg-blue-600">Back</a>
+        <a href="{{ route('admin.dashboard') }}" class="mt-8 inline-block px-4 py-2 bg-blue-800 text-white font-semibold rounded hover:bg-blue-600">Back</a>
     </div>
 </body>
 </html>

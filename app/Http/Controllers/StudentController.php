@@ -14,6 +14,9 @@ use PDF;
 use QrCode;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Notifications\StudentCreatedNotification;
+use App\Notifications\StudentDeletedNotification;
+use App\Notifications\StudentUpdatedNotification;
 class StudentController extends Controller
 {
     /**
@@ -77,8 +80,11 @@ class StudentController extends Controller
             'fbaccount' => 'required|string',
         ]);
 
-        Student::create($request->all());
+        $student = Student::create($request->all());
 
+        // Trigger the notification
+        $user = auth()->user();
+        $user->notify(new StudentCreatedNotification($student));
         return redirect()->route('students.index')
             ->with('success', 'Student created successfully.');
     }
@@ -126,6 +132,8 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $student->update($request->all());
 
+        auth()->user()->notify(new StudentUpdatedNotification($student));
+        
         return redirect()->route('students.index')
             ->with('success', 'Student updated successfully.');
     }
@@ -139,7 +147,11 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
+         // Trigger the notification
+         $user = auth()->user();
+         $user->notify(new StudentDeletedNotification($student));
         return response()->json(['message' => 'Student deleted successfully']);
+        
     }
     public function export(Request $request)
     {// Retrieve selected student IDs from the form
