@@ -17,6 +17,11 @@ use Dompdf\Options;
 use App\Notifications\StudentCreatedNotification;
 use App\Notifications\StudentDeletedNotification;
 use App\Notifications\StudentUpdatedNotification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentEmail;
+use Illuminate\Support\Facades\Log;
+
+
 class StudentController extends Controller
 {
     /**
@@ -24,7 +29,30 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function sendEmail(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'selected_students' => 'required|array',
+            'selected_students.*' => 'exists:students,id',
+        ]);
+
+        // Get the selected student IDs from the request
+        $selectedStudents = $request->input('selected_students');
+
+        // Fetch the students from the database
+        $students = Student::whereIn('id', $selectedStudents)->get();
+
+        // Loop through the selected students and send email to each one
+        foreach ($students as $student) {
+            Mail::to($student->email_address)->send(new StudentEmail($student));
+        }
+
+        // Redirect back or to a specific route after sending the emails
+        return redirect()->back()->with('status', 'Emails sent successfully');
+    }
+
+
     public function index()
     {
         $students = Student::all();

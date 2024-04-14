@@ -17,6 +17,7 @@
                 <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
                 <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected Data</button>
                 <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete Selected</button>
+                <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send Email to Selected Students</button>
                 <form action="{{ route('students.index') }}" method="GET" id="studentsearchForm" class="flex items-center">
                     @csrf
                     <input type="text" name="search" placeholder="Search..." class="input-search border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-4 py-2 mr-2">
@@ -85,5 +86,38 @@
         </div>
     </div>
     <script src="{{ asset('js/student/student.js') }}"></script>
+ 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- JavaScript code to handle sending emails to selected students -->
+<script>
+    $(document).ready(function() {
+        $('#sendEmailButton').click(function() {
+            // Get the IDs of selected students
+            var selectedStudents = [];
+            $('input[name="selected_students[]"]:checked').each(function() {
+                selectedStudents.push($(this).val());
+            });
+
+            // Send a POST request to your server
+            $.ajax({
+                url: '{{ route("send.email") }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    selected_students: selectedStudents
+                },
+                success: function(response) {
+                    // Handle success response, if needed
+                    alert('Emails sent successfully');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response, if needed
+                    console.error('Error sending emails:', error);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

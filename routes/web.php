@@ -76,7 +76,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
-    
+
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::delete('/notifications/{notificationId}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
     Route::put('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
@@ -168,4 +168,4 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
  
- 
+Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
