@@ -13,7 +13,7 @@
     <div class="max-w-md w-full p-6 bg-white rounded-md shadow-md font-sans">
         <img src="https://aics.edu.ph/wp-content/uploads/2018/10/logo_small.png" alt="Image" class="mx-auto mb-4 w-24 h-auto">
         <h1 class="text-3xl font-semibold text-black-600 mb-6 text-center">Student Data Entry Form</h1>
-        
+
         <!-- Error Handling -->
         @if($errors->any())
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -66,6 +66,15 @@
                     <option value="">Please select city</option>
                     <option value="Manila">Manila</option>
                     <option value="Parañaque">Parañaque</option>
+                    <option value="Taguig">Taguig</option>
+                    <option value="Muntinlupa">Muntinlupa</option>
+                    <option value="Laguna">Laguna</option>
+                    <option value="Pasay">Pasay</option>
+                    <option value="Pasig">Pasig</option>
+                    <option value="Caloocan">Caloocan</option>
+                    <option value="Quezon">Quezon</option>
+
+
                 </select>
             </div>
             <!-- Grade Level -->
@@ -106,7 +115,7 @@
         @foreach($schools as $id => $name)
             <option value="{{ $name }}">{{ $name }}</option>
         @endforeach
-    </select>   
+    </select>
 </div>
             <!-- Guardian Information -->
             <h3 class="text-2xl font-medium mb-2">Guardian Information:</h3>

@@ -27,8 +27,8 @@
                 <p class="text-gray-700">{{ $school->city }}</p>
             </div>
             <div>
-                <p class="text-lg font-bold mb-2">Country:</p>
-                <p class="text-gray-700">{{ $school->country }}</p>
+                <p class="text-lg font-bold mb-2">Contact:</p>
+                <p class="text-gray-700">{{ $school->contact }}</p>
             </div>
         </div>
     </div>

@@ -17,5 +17,6 @@ class School extends Model
         'address',
         'city',
         'country',
+        'contact'
     ];
 }

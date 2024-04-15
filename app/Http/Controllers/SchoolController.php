@@ -15,7 +15,7 @@ class SchoolController extends Controller
 {
     public function index()
     {
-       
+
         $schools = School::paginate(10); // 10 users per page
         return view('schools.index', compact('schools'));
     }
@@ -31,7 +31,8 @@ class SchoolController extends Controller
             'name' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
-            'country' => 'required|string',
+            'contact' => 'required|string',
+
             // Add more validation rules as needed
         ]);
 
@@ -57,7 +58,7 @@ class SchoolController extends Controller
             'name' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
-            'country' => 'required|string',
+            'contact' => 'required|string',
             // Add more validation rules as needed
         ]);
 
@@ -69,7 +70,7 @@ class SchoolController extends Controller
 
     public function destroy(School $school)
     {
-       
+
 
         $school->delete();
         return response()->json(['message' => 'School deleted successfully']);
