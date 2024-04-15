@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\MapController;
 
 use App\Http\Controllers\NotificationController;
 
@@ -169,3 +170,5 @@ Route::get('/welcome', function () {
 });
  
 Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
+Route::get('/map', [MapController::class, 'showMap'])->name('map.show');
+Route::get('/submission-statistics', [StudentController::class, 'statistics'])->name('submission.statistics');

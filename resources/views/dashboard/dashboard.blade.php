@@ -38,14 +38,14 @@ $(document).ready(function() {
 </script>
 <body class="bg-gray-100">
     <!-- Sidebar Section -->
-    <button class="toggle-sidebar text-gray-100 p-1 fixed top-4 left-4">
+    <button class="toggle-sidebar text-blue-900 p-1 fixed top-4 left-4 ">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M20 6H4M20 12H4m16 6H4"></path>
         </svg>
     </button>
 
-    <aside class="bg-blue-900 text-gray-200 h-screen w-40 fixed left-0 top-0 shadow-md sidebar">
+    <aside class="bg-blue-900 text-gray-200 h-screen w-40 fixed left-0 top-0 shadow-md sidebar sidebar-hidden">
         <div class="py-14 px-2 flex flex-col items-center">
             <img src="https://aics.edu.ph/wp-content/uploads/2018/10/logo_small.png" width="80" height="80"
                 alt="Logo">
@@ -55,6 +55,8 @@ $(document).ready(function() {
             <li><a href="#" class="block py-2 px-4 hover:bg-blue-800">Dashboard</a></li>
             <li><a href="{{ route('profile') }}" class="block py-2 px-4 hover:bg-blue-800">Profile</a></li>
             <li><a href="{{ route('notifications.index') }}" class="block py-2 px-4 hover:bg-blue-800">Notification</a>
+            <li><a href="{{ route('submission.statistics') }}" class="block py-2 px-4 hover:bg-blue-800">Statistics</a>
+            <li><a href="{{ route('map.show') }}" class="block py-2 px-4 hover:bg-blue-800">Map</a>
             </li>
         </ul>
         <div class="mt-auto py-4 px-4">
@@ -130,7 +132,7 @@ $(document).ready(function() {
         </div>
 
         <!-- Notification Section -->
-        <div class="notification-container text-blue-800 rounded-md  fixed top-4 right-4 overflow-auto">
+        <div class="notification-container text-blue-800 rounded-md fixed top-4 right-4 overflow-auto">
             @if(auth()->check())
             @foreach(auth()->user()->unreadNotifications as $notification)
             <div class="notification mb-2 bg-blue-200 border border-blue-300 p-4">

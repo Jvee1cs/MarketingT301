@@ -20,7 +20,7 @@ use App\Notifications\StudentUpdatedNotification;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentEmail;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -248,4 +248,38 @@ class StudentController extends Controller
     
             return response()->json(['message' => 'students deleted successfully'], 200);
         }
+        public function statistics()
+{
+   // Total number of students submitted
+   $totalStudents = Student::count();
+
+   // Number of students submitted by school
+   $studentsBySchool = Student::select('school_name', DB::raw('count(*) as total_students'))
+       ->groupBy('school_name')
+       ->orderBy('total_students', 'desc')
+       ->limit(50)
+       ->get();
+
+   // Distribution of students by grade level
+   $studentsByGradeLevel = Student::select('grade_level', DB::raw('count(*) as total_students'))
+       ->groupBy('grade_level')
+       ->orderBy('grade_level')
+       ->get();
+
+   // Top courses chosen by students
+   $topCourses = Student::select('course', DB::raw('count(*) as total_students'))
+       ->groupBy('course')
+       ->orderBy('total_students', 'desc')
+       ->limit(5)
+       ->get();
+
+   // Submission trend data (assuming you have a created_at field in the Student model)
+   $submissionTrend = Student::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
+       ->groupBy('date')
+       ->orderBy('date')
+       ->get();
+
+    // Pass data to the view and load the view
+    return view('submission_statistics', compact('totalStudents', 'studentsBySchool', 'studentsByGradeLevel', 'topCourses', 'submissionTrend'));
+}
 }

@@ -104,7 +104,7 @@
         class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
         <option value="">Please select school</option>
         @foreach($schools as $id => $name)
-            <option value="{{ $id }}">{{ $name }}</option>
+            <option value="{{ $name }}">{{ $name }}</option>
         @endforeach
     </select>   
 </div>
