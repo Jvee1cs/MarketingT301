@@ -3,6 +3,7 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\LinkController;
@@ -35,7 +36,9 @@ Route::post('/school/add', [SchoolController::class, 'store'])->name('school.add
 // Routes for displaying and managing School records
 Route::get('/schools', [SchoolController::class, 'index'])->name('schools.index');
 Route::get('/schools/create', [SchoolController::class, 'create'])->name('schools.create');
+Route::get('schools/city', [SchoolController::class, 'city'])->name('schools.city');
 Route::post('/schools', [SchoolController::class, 'store'])->name('schools.store');
+Route::post('/schools', [SchoolController::class, 'stored'])->name('schools.stored');
 Route::get('/schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
 Route::get('/schools/{school}/edit', [SchoolController::class, 'edit'])->name('schools.edit');
 Route::put('/schools/{school}', [SchoolController::class, 'update'])->name('schools.update');
@@ -44,6 +47,8 @@ Route::post('/schools/bulk-delete',  [SchoolController::class, 'bulkDelete'])->n
 Route::post('/schools/export', [SchoolController::class, 'export'])->name('schools.export');
 Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('schools.destroy');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
+
 
 
 // Define the route for user records
@@ -100,6 +105,10 @@ Route::post('/student', [StudentController::class, 'store'])->name('student.stor
 Route::get('/students/records', [StudentController::class, 'index'])->name('students.records');
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+Route::get('/students/course', [StudentController::class, 'course'])->name('students.course');
+Route::get('students/strand', [StudentController::class, 'strand'])->name('students.strand');
+Route::post('students/stored', [StudentController:: class, 'stored'])->name('students.stored');
+Route::post('/students/stores', [StudentController::class, 'stores'])->name('students.stores');
 Route::post('/students/store', [StudentController::class, 'store'])->name('students.store');
 Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
 Route::put('/students/{id}/update', [StudentController::class, 'update'])->name('students.update');
@@ -146,7 +155,7 @@ Route::get('/get_flash_messages', function () {
 });
 
 Route::middleware('web')->group(function () {
-    
+
 
     // Define the route for creating students with a unique link
     Route::get('/aics/{uniqueIdentifier}', [LinkController::class, 'create'])
@@ -168,7 +177,7 @@ Route::post('/aics/store', [LinkController::class, 'store'])
 Route::get('/welcome', function () {
     return view('welcome');
 });
- 
+
 Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
 Route::get('/map', [MapController::class, 'showMap'])->name('map.show');
 Route::get('/submission-statistics', [StudentController::class, 'statistics'])->name('submission.statistics');

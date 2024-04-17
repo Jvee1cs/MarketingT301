@@ -7,6 +7,7 @@ use App\Models\School;
 use Illuminate\Support\Facades\Auth; // Add this line
 use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
 use App\Exports\StudentExport;
+use App\Models\Cities;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Dompdf\Dompdf;
@@ -24,6 +25,27 @@ class SchoolController extends Controller
     {
         return view('schools.create');
     }
+
+    public function city()
+    {
+        return view('schools.city');
+    }
+
+    public function stored(Request $request)
+    {
+        $request->validate([
+
+            'city' => 'required|string',
+
+        ]);
+
+            Cities::create($request->all());
+
+            return redirect()->route('schools.index')
+                ->with('success', 'School created successfully');
+
+    }
+
 
     public function store(Request $request)
     {

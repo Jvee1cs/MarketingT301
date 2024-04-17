@@ -68,7 +68,7 @@ $(document).ready(function() {
         </div>
     </aside>
     <!-- Main Content Section -->
-    
+
     <main class="flex-1 p-10">
 
         <div class="container mx-auto px-6 py-4">
@@ -103,6 +103,12 @@ $(document).ready(function() {
                 <a href="{{ route('manage.links') }}"
                     class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Generate
                     Form Link</a>
+                    <a href="{{ route('students.course') }}"
+                    class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">
+                    Add New Course</a>
+                    <a href="{{ route('students.strand') }}"
+                    class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">
+                    Add New Strand</a>
 
             </div>
             <!-- School Record Card -->
@@ -115,7 +121,9 @@ $(document).ready(function() {
                 <a href="{{ route('schools.create') }}"
                     class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">Add
                     Target School</a>
-
+                    <a href="{{ route('schools.city') }}"
+                    class="button card-button bg-blue-500 hover:bg-blue-600 px-4 text-white py-2 rounded-md block text-center mb-4">
+                    Add Target Cities</a>
             </div>
             <!-- User Record Card -->
             <div class="card bg-white rounded-lg shadow-md p-6 w-full md:w-72">
@@ -172,7 +180,7 @@ $(document).ready(function() {
 </button>
     </main>
     <script>
-        
+
 
         // Function to toggle notification visibility
         $('.toggle-notifications').click(function () {

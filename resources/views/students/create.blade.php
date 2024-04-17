@@ -62,20 +62,12 @@
             <div>
                 <label for="city" class="block text-sm font-medium text-gray-700">City *</label>
                 <select id="city" name="city" required
-                    class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
-                    <option value="">Please select city</option>
-                    <option value="Manila">Manila</option>
-                    <option value="Parañaque">Parañaque</option>
-                    <option value="Taguig">Taguig</option>
-                    <option value="Muntinlupa">Muntinlupa</option>
-                    <option value="Laguna">Laguna</option>
-                    <option value="Pasay">Pasay</option>
-                    <option value="Pasig">Pasig</option>
-                    <option value="Caloocan">Caloocan</option>
-                    <option value="Quezon">Quezon</option>
-
-
-                </select>
+                class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
+                <option value="">Please select city</option>
+                @foreach($cities as $id => $city)
+                    <option value="{{ $city }}">{{ $city }}</option>
+                @endforeach
+            </select>
             </div>
             <!-- Grade Level -->
             <div>
@@ -91,19 +83,22 @@
             <div>
                 <label for="strand" class="block text-sm font-medium text-gray-700">Desired Strand *</label>
                 <select id="strand" name="strand" required
-                    class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
-                    <option value="">Select Strand</option>
-                    <option value="ICT">ICT</option>
-                </select>
+                class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
+                <option value="">Please select strands</option>
+                @foreach($strands as $id => $strand)
+                    <option value="{{ $strand }}">{{ $strand }}</option>
+                @endforeach
+            </select>
             </div>
             <div>
                 <label for="course" class="block text-sm font-medium text-gray-700">Course *</label>
                 <select id="course" name="course" required
-                    class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
-                    <option value="">Select course</option>
-                    <option value="BS IN ENTREPRENEURSHIP">BS IN ENTREPRENEURSHIP</option>
-                    <option value="BS IN COMPUTER SCIENCE">BS IN COMPUTER SCIENCE</option>
-                </select>
+                class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
+                <option value="">Please select courses</option>
+                @foreach($courses as $id => $course)
+                    <option value="{{ $course }}">{{ $course }}</option>
+                @endforeach
+            </select>
             </div>
             <!-- School Information -->
             <h3 class="text-2xl font-medium mb-2">School Information:</h3>

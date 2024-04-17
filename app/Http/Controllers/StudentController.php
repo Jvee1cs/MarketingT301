@@ -19,6 +19,9 @@ use App\Notifications\StudentDeletedNotification;
 use App\Notifications\StudentUpdatedNotification;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentEmail;
+use App\Models\Cities;
+use App\Models\Course;
+use App\Models\Strand;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -91,7 +94,47 @@ class StudentController extends Controller
         return view('students.index', compact('students'));
         // Your logic here
     }
-    
+
+    public function course()
+    {
+        return view('students.course');
+    }
+
+    public function stored(Request $request)
+    {
+        $request->validate([
+
+            'course' => 'required|string',
+
+        ]);
+
+            Course::create($request->all());
+
+            return redirect()->route('students.records')
+                ->with('success', 'Course created successfully');
+
+    }
+
+    public function strand()
+    {
+        return view('students.strand');
+    }
+
+    public function stores(Request $request)
+    {
+        $request->validate([
+
+            'strand' => 'required|string',
+
+        ]);
+
+            Strand::create($request->all());
+
+            return redirect()->route('students.records')
+                ->with('success', 'Strand created successfully');
+
+    }
+
     /**
      * Show the form for creating a new student.
      *
@@ -105,9 +148,11 @@ class StudentController extends Controller
     public function create()
     {
         // Fetch all school names from the database
-        $students = Student::all();
+        $strands = Strand::pluck('strand', 'id');
+        $courses = Course::pluck('course', 'id');
+        $cities = Cities::pluck('city', 'id');
         $schools = School::pluck('name', 'id');
-        return view('students.create', compact('schools','students'));
+        return view('students.create', compact('schools','cities','courses','strands'));
     }
 
     /**
@@ -182,14 +227,14 @@ class StudentController extends Controller
             'g_relationship' => 'required|string',
             'email_address' => 'required|string|email',
             'fbaccount' => 'required|string',
-            
+
         ]);
 
         $student = Student::findOrFail($id);
         $student->update($request->all());
 
         auth()->user()->notify(new StudentUpdatedNotification($student));
-        
+
         return redirect()->route('students.index')
             ->with('success', 'Student updated successfully.');
     }
@@ -207,23 +252,23 @@ class StudentController extends Controller
          $user = auth()->user();
          $user->notify(new StudentDeletedNotification($student));
         return response()->json(['message' => 'Student deleted successfully']);
-        
+
     }
     public function export(Request $request)
     {// Retrieve selected student IDs from the form
         $selectedstudentIds = $request->input('selected_students', []);
-    
+
         // Retrieve students based on the selected IDs
         $students = student::whereIn('id', $selectedstudentIds)->get();
-    
+
         // Create a new PDF instance
         $pdf = new Dompdf();
-    
+
         // Set options for PDF rendering
         $options = new Options();
         $options->set('defaultFont', 'Arial');
         $pdf->setOptions($options);
-    
+
         // Start buffering the output
         // Begin PDF content
     echo "<h1>student List</h1>";
@@ -237,7 +282,7 @@ class StudentController extends Controller
             <th>city</th>
             <th>grade_level</th>
         </tr>";
-    
+
     foreach ($students as $student) {
         echo "<tr>
             <td>{$student->id}</td>
@@ -252,28 +297,28 @@ class StudentController extends Controller
     echo "</table>";
         // End buffering and assign the content to a variable
         $html = ob_get_clean();
-    
+
         // Load HTML content into the PDF
         $pdf->loadHtml($html);
-    
+
         // Set paper size and orientation
         $pdf->setPaper('A4', 'landscape');
-    
+
         // Render the PDF
         $pdf->render();
-    
+
         // Output the PDF to the browser
         return $pdf->stream('students.pdf');
     }
-    
+
     public function bulkDelete(Request $request)
         {
             $studentIds = $request->input('student_ids');
-    
+
             // Perform validation if needed
-    
+
             student::whereIn('id', $studentIds)->delete();
-    
+
             return response()->json(['message' => 'students deleted successfully'], 200);
         }
         public function statistics()
