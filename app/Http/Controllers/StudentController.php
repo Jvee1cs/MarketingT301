@@ -105,8 +105,9 @@ class StudentController extends Controller
     public function create()
     {
         // Fetch all school names from the database
+        $students = Student::all();
         $schools = School::pluck('name', 'id');
-        return view('students.create', compact('schools'));
+        return view('students.create', compact('schools','students'));
     }
 
     /**
