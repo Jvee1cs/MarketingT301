@@ -118,4 +118,3 @@ document.querySelectorAll('.delete-student').forEach(function(button) {
         }
     });
 });
-

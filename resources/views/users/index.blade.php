@@ -67,7 +67,7 @@
         </form>
          <!-- Pagination links -->
          <div class="mt-4">
-            {{ $users->links() }}
+            {{ $paginate->links() }}
         </div>
    
     </div>

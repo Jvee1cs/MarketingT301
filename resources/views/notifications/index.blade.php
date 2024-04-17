@@ -7,11 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         /* Custom styles can be added here */
+        .unread {
+            background-color: #FDE68A; /* Soft yellow background for unread messages */
+        }
     </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4 md:p-8">
-        <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Notifications</h1>
+        <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Notification Center</h1>
 
         @if(session('success'))
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
@@ -30,7 +33,7 @@
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light">
                     @foreach($notifications as $notification)
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <tr class="border-b border-gray-200 hover:bg-gray-50 {{ $notification->read_at ? '' : 'unread' }}">
                             <td class="py-3 px-6 text-left">{{ $notification->data['message'] }}</td>
                             <td class="py-3 px-6 text-left">{{ $notification->created_at->format('M d, Y H:i:s') }}</td>
                             <td class="py-3 px-6 text-left">

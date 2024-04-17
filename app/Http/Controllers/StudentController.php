@@ -53,12 +53,39 @@ class StudentController extends Controller
     }
 
 
-    public function index()
-    {
-        $students = Student::all();
-        $students = Student::paginate(10); // 10 users per page
-        return view('students.index', compact('students'));
+    public function index(Request $request)
+{
+    // Retrieve the search query from the request
+    $searchQuery = $request->input('search');
+
+    // Retrieve the selected school filter
+    $selectedSchool = $request->input('school_filter');
+
+    // Query students and filter based on the search query and selected school
+    $studentsQuery = Student::query();
+
+    if ($searchQuery) {
+        $studentsQuery->where(function($query) use ($searchQuery) {
+            $query->where(DB::raw("CONCAT(stud_first_name, ' ', stud_last_name)"), 'like', '%' . $searchQuery . '%')
+                  ->orWhere('email_address', 'like', '%' . $searchQuery . '%')
+                  ->orWhere('phone', 'like', '%' . $searchQuery . '%');
+        });
     }
+
+    if ($selectedSchool) {
+        $studentsQuery->where('school_name', $selectedSchool);
+    }
+
+    // Paginate the filtered students
+    $students = $studentsQuery->orderBy('stud_first_name')->paginate(15);
+
+    // Fetch distinct school names from the database
+    $schools = Student::distinct()->pluck('school_name');
+
+    // Pass data to the view
+    return view('students.index', compact('students', 'schools', 'searchQuery', 'selectedSchool'));
+}
+
     public function StudentRecord() {
         $students = Student::all();
         return view('students.index', compact('students'));

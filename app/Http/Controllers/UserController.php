@@ -73,8 +73,8 @@ public function index(Request $request)
     if (!$searchQuery) {
         $users = User::all();
     }
-    $users = User::paginate(10); // 10 users per page
-    return view('users.index', compact('users'));
+    $paginate = User::paginate(10); // 10 users per page
+    return view('users.index', compact('users','paginate'));
 }
 
 

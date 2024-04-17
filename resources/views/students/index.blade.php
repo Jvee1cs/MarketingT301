@@ -10,22 +10,34 @@
 <body class="bg-gray-100">
     <div class="container mx-auto p-4 md:p-8">
         <div class="mb-4 flex flex-wrap justify-between items-center">
-            <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Student List</h1>
+            <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Student List</h1> 
+            
             <div class="space-x-4 flex items-center">
-              
                 <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Create New student</a>
+                
                 <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
                 <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected Data</button>
                 <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete Selected</button>
                 <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send Email to Selected Students</button>
                 <form action="{{ route('students.index') }}" method="GET" id="studentsearchForm" class="flex items-center">
                     @csrf
-                    <input type="text" name="search" placeholder="Search..." class="input-search border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-4 py-2 mr-2">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Search</button>
+                    <input type="text" name="search" placeholder="Search..." class="input-search mr-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ $searchQuery }}">
+                    @if ($searchQuery || $selectedSchool)
+                        <a href="{{ route('students.index') }}" class="mr-2 text-red-500 hover:text-red-700">Clear</a>
+                    @endif
+                    <select id="schoolFilter" name="school_filter" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">All Schools</option>
+                        @foreach($schools as $school)
+                            <option value="{{ $school }}" {{ $selectedSchool == $school ? 'selected' : '' }}>{{ $school }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="mt-1 px-3 text-blue-500 hover:text-blue-700 mr-2">Search</button>
+                    
                 </form>
             </div>
+            
         </div>
-
+        <div>
         <form action="{{ route('students.export') }}" method="POST" id="studentForm">
             @csrf
             <div class="overflow-x-auto">
@@ -41,22 +53,22 @@
                         <th class="py-3 px-6 text-left">ID</th>
                         <th class="py-3 px-6 text-left">Name</th>
                         <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-6 text-left">School</th>
                         <th class="py-3 px-6 text-left">Created At</th>
-                        <th class="py-3 px-6 text-left">Updated At</th>
                         <th class="py-3 px-6 text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light">
                     @foreach($students as $student)
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100" data-school="{{ $student->school_name }}">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <input type="checkbox" name="selected_students[]" value="{{ $student->id }}">
                             </td>
                             <td class="py-3 px-6 text-left">{{ $student->id }}</td>
-                            <td class="py-3 px-6 text-left">{{ $student->stud_last_name }}</td>
-                            <td class="py-3 px-6 text-left">{{ $student->stud_first_name }}</td>
-                            <td class="py-3 px-6 text-left">{{ $student->created_at }}</td>
-                            <td class="py-3 px-6 text-left">{{ $student->updated_at }}</td>
+                            <td class="py-3 px-6 text-left">{{ $student->stud_first_name }} {{ $student->stud_last_name }}</td>
+                            <td class="py-3 px-6 text-left">{{ $student->email_address }}</td>
+                            <td class="py-3 px-6 text-left">{{ $student->school_name }}</td>
+                            <td class="py-3 px-6 text-left">{{ $student->created_at->format('M d, Y H:i:s') }}</td>
                             <td class="py-3 px-6 text-left">
                                 <a href="#" class="text-blue-500 hover:text-blue-700 mr-2 view-details" data-id="{{ $student->id }}">View</a>
                                 <a href="#" class="text-blue-500 hover:text-blue-700 mr-2 edit-details" data-id="{{ $student->id }}">Edit</a>
@@ -68,10 +80,12 @@
             </table>
             </div>
         </form>
-         <!-- Pagination links -->
-         <div class="mt-4">
-            {{ $students->links() }}
-        </div>
+
+<div class="mt-4">
+    {{ $students->appends(['school_filter' => $selectedSchool, 'search' => $searchQuery])->links() }}
+</div>
+
+
    
     </div>
 
@@ -86,38 +100,51 @@
         </div>
     </div>
     <script src="{{ asset('js/student/student.js') }}"></script>
- 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    $('#schoolFilter').change(function() {
+        var selectedSchool = $(this).val();
 
-<!-- JavaScript code to handle sending emails to selected students -->
-<script>
-    $(document).ready(function() {
-        $('#sendEmailButton').click(function() {
-            // Get the IDs of selected students
-            var selectedStudents = [];
-            $('input[name="selected_students[]"]:checked').each(function() {
-                selectedStudents.push($(this).val());
-            });
+        // Show all rows if no school is selected
+        if (!selectedSchool) {
+            $('tbody tr').show();
+            return;
+        }
 
-            // Send a POST request to your server
-            $.ajax({
-                url: '{{ route("send.email") }}',
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    selected_students: selectedStudents
-                },
-                success: function(response) {
-                    // Handle success response, if needed
-                    alert('Emails sent successfully');
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response, if needed
-                    console.error('Error sending emails:', error);
-                }
-            });
+        // Hide all rows and then show only the rows with the selected school
+        $('tbody tr').hide().filter(function() {
+            return $(this).data('school') === selectedSchool;
+        }).show();
+    });
+});
+$(document).ready(function() {
+    $('#sendEmailButton').click(function() {
+        // Get the IDs of selected students
+        var selectedStudents = [];
+        $('input[name="selected_students[]"]:checked').each(function() {
+            selectedStudents.push($(this).val());
+        });
+
+        // Send a POST request to your server
+        $.ajax({
+            url: '{{ route("send.email") }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                selected_students: selectedStudents
+            },
+            success: function(response) {
+                // Handle success response, if needed
+                alert('Emails sent successfully');
+            },
+            error: function(xhr, status, error) {
+                // Handle error response, if needed
+                console.error('Error sending emails:', error);
+            }
         });
     });
-</script>
+});
+    </script>
 </body>
 </html>
