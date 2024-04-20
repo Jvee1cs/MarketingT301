@@ -19,6 +19,8 @@
                 <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected Data</button>
                 <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete Selected</button>
                 <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send Email to Selected Students</button>
+                <button id="sendSMSButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send SMS to Selected Students</button>
+
                 <form action="{{ route('students.index') }}" method="GET" id="studentsearchForm" class="flex items-center">
                     @csrf
                     <input type="text" name="search" placeholder="Search..." class="input-search mr-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ $searchQuery }}">
@@ -88,7 +90,19 @@
 
    
     </div>
-
+<!-- SMS Message Modal -->
+<div id="smsMessageModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 hidden">
+    <div class="flex items-center justify-center h-full">
+        <div class="bg-white p-8 rounded shadow-lg">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-900">Enter SMS Message</h2>
+            <textarea id="smsMessageInput" class="w-full h-32 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter your SMS message..."></textarea>
+            <div class="flex justify-end mt-4">
+                <button id="cancelSMSMessage" class="mr-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Cancel</button>
+                <button id="sendSMSMessage" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- student Details Modal -->
     <div id="studentDetailsModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 hidden">
         <div class="flex items-center justify-center h-full">
@@ -143,6 +157,50 @@ $(document).ready(function() {
                 console.error('Error sending emails:', error);
             }
         });
+    });
+});
+// Show SMS message modal when "Send SMS to Selected Students" button is clicked
+$('#sendSMSButton').click(function() {
+    $('#smsMessageModal').removeClass('hidden');
+});
+
+// Hide SMS message modal when "Cancel" button is clicked
+$('#cancelSMSMessage').click(function() {
+    $('#smsMessageModal').addClass('hidden');
+});
+
+// Send SMS message when "Send" button is clicked
+$('#sendSMSMessage').click(function() {
+    var smsMessage = $('#smsMessageInput').val();
+    if (!smsMessage) {
+        alert('Please enter a message.');
+        return;
+    }
+
+    var selectedStudents = [];
+    $('input[name="selected_students[]"]:checked').each(function() {
+        selectedStudents.push($(this).val());
+    });
+
+    // Send a POST request to your server
+    $.ajax({
+        url: '{{ route("students.sendSMS") }}',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            selected_students: selectedStudents,
+            sms_message: smsMessage
+        },
+        success: function(response) {
+            // Handle success response
+            alert('SMS messages sent successfully');
+            $('#smsMessageModal').addClass('hidden');
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.error('Error sending SMS messages:', error);
+            alert('Failed to send SMS messages. Please try again.');
+        }
     });
 });
     </script>

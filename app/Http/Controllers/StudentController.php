@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Twilio\Exceptions\RestException;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentEmail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Twilio\Rest\Client;
 
 class StudentController extends Controller
 {
@@ -29,6 +31,56 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+      public function sendSMS(Request $request)
+    {
+        // Validate the request data
+    $request->validate([
+        'selected_students' => 'required|array',
+        'selected_students.*' => 'exists:students,id',
+        'sms_message' => 'required|string|max:160', // Adjust the max length as per your SMS service provider's limitations
+    ]);
+
+    // Get the selected student IDs from the request
+    $selectedStudents = $request->input('selected_students');
+
+    // Fetch the students from the database
+    $students = Student::whereIn('id', $selectedStudents)->get();
+
+    // Initialize Twilio client with your Twilio credentials
+    $sid = env('TWILIO_SID');
+    $token = env('TWILIO_AUTH_TOKEN');
+    $twilioPhoneNumber = env('TWILIO_PHONE_NUMBER');
+    $twilio = new Client($sid, $token);
+
+    // Loop through the selected students and send SMS message to each one
+    foreach ($students as $student) {
+        try {
+            // Prepend the country code for the Philippines ('+63') to the phone number
+            $phoneNumber = '+63' . substr($student->phone, 1);
+
+            $twilio->messages->create(
+                $phoneNumber, // Student's phone number with country code
+                [
+                    'from' => $twilioPhoneNumber, // Your Twilio phone number
+                    'body' => $request->input('sms_message'),
+                ]
+            );
+        } catch (RestException $e) {
+            // Log any errors that occur during SMS sending
+            \Log::error('Error sending SMS to student ' . $student->id . ': ' . $e->getMessage());
+            // Optionally, you can handle errors here based on your application's requirements
+        }
+    }
+
+    // Redirect back or to a specific route after sending the SMS messages
+    return redirect()->back()->with('status', 'SMS messages sent successfully');
+    }
+
+    // Other controller methods...
+
+
+
     public function sendEmail(Request $request)
     {
         // Validate the request data
