@@ -181,7 +181,7 @@
         }
         else if (selectedCity === 'Muntinlupa') {
             // Handle Taguig barangays
-            var selectedSchools = muntinlupaSchools; // Schools for Taguig
+            var selectedSchools = muntinlupaSchools; // Schools for Muntinlupa
             highlightBarangay(selectedBarangay);
             addSchoolMarkers(selectedSchools);
         }

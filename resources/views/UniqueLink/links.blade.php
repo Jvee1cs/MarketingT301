@@ -13,7 +13,7 @@
         <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Manage Links</h1>
         <div class="mb-4 flex flex-wrap justify-between items-center">
             <a href="{{ route('aics.gen') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Generate New Link</a>
-</div>
+        </div>
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white rounded-lg overflow-hidden">
                 <thead>
@@ -36,20 +36,23 @@
                             <td class="py-3 px-6 {{ $link->is_active ? 'text-green-500' : 'text-red-500' }}">{{ $link->is_active ? 'Active' : 'Inactive' }}</td>
                             <td class="py-3 px-6">{{ $link->created_at }}</td>
                             <td class="py-3 px-6">{{ $link->updated_at }}</td>
-                            <td class="py-3 px-6">
+                            <td class="py-3 px-6 flex items-center space-x-4">
                                 <form action="{{ route('toggle.activation', $link->unique_identifier) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded">{{ $link->is_active ? 'Deactivate' : 'Activate' }}</button>
                                 </form>
-                                <form action="{{ route('links.edit.expiration', $link->unique_identifier) }}" method="POST">
-                                    @csrf
-                                    <input type="datetime-local" name="expires_at" value="{{ date('Y-m-d\TH:i', strtotime($link->expires_at)) }}">
-                                    <button type="submit" class="ml-2 text-blue-500 hover:text-blue-700">Edit Expiration</button>
-                                </form>
+                                <button class="text-blue-500 hover:text-blue-700 edit-expiration">Edit Expiration</button>
                                 <form action="{{ route('links.delete', $link->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="ml-2 text-red-500 hover:text-red-700">Delete</button>
+                                    <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                                </form>
+                                <form action="{{ route('links.edit.expiration', $link->unique_identifier) }}" method="POST" class="edit-form hidden">
+                                    @csrf
+                                    <div class="flex items-center">
+                                        <input type="datetime-local" name="expires_at" value="{{ date('Y-m-d\TH:i', strtotime($link->expires_at)) }}" class="mr-2 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-500">
+                                        <button type="submit" class="text-blue-500 hover:text-blue-700">Save</button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>
@@ -57,7 +60,18 @@
                 </tbody>
             </table>
         </div>
-       
     </div>
+
+    <script>
+        // JavaScript to toggle the visibility of the edit form
+        document.querySelectorAll('.edit-expiration').forEach(button => {
+            button.addEventListener('click', () => {
+                const editForm = button.parentElement.querySelector('.edit-form');
+                if (editForm) {
+                    editForm.classList.toggle('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

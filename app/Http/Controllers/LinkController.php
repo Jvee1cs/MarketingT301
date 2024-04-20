@@ -9,11 +9,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class LinkController extends Controller
 {
+    private function deleteExpiredLinks()
+    {
+        $expiredLinks = Link::where('expires_at', '<', Carbon::now())->get();
+
+        foreach ($expiredLinks as $link) {
+            $link->delete();
+        }
+    }
     public function generateLink()
     {
+        // Delete expired links before generating a new one
+        $this->deleteExpiredLinks();
+
         $uniqueIdentifier = Str::random(10);
         $expiresAt = now()->addHours(24);
         $qrCode = $this->generateQrCode(route('aics.create.unique', $uniqueIdentifier));
@@ -107,11 +119,13 @@ class LinkController extends Controller
 
     public function generateLinkPage()
     {
+        $this->deleteExpiredLinks();
         return view('/UniqueLink/generate-link');
     }
 
     public function manageLinks()
     {
+        $this->deleteExpiredLinks();
         $links = Link::all();
         return view('/UniqueLink/links', compact('links'));
     }

@@ -28,13 +28,18 @@
         <button id="toggleTotalStudents" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1" onclick="toggleVisibility('totalStudents')" data-name="Total Students">Hide Total Students</button>
         <button id="toggleStudentsBySchool" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1" onclick="toggleVisibility('studentsBySchool')" data-name="Students by School">Show Students by School</button>
         <button id="toggleTopCourses" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1" onclick="toggleVisibility('topCourses')" data-name="Top Courses">Show Top Courses</button>
-
+        
         <div id="totalStudents" class="mb-4">
     </br>
             <p class="lead text-xl font-semibold mb-4 text-blue-900 text-center">Total Number of Students Submitted: <strong>{{ $totalStudents }}</strong></p>
             <div class="chart-container">
                 <canvas id="gradeLevelChart" width="400" height="200"></canvas>
             </div>
+            <ul class="list-group">
+                @foreach ($studentsByGradeLevel as $student)
+                    <li class="list-group-item">Grade {{ $student->grade_level }}: <strong>{{ $student->total_students }}</strong></li>
+                @endforeach
+            </ul>
         </div>
 
         <div id="studentsBySchool" class="mb-4" style="display: none;">

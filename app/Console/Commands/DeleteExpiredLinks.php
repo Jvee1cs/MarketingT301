@@ -10,20 +10,13 @@ class DeleteExpiredLinks extends Command
 {
     protected $signature = 'links:delete-expired';
 
-    protected $description = 'Delete expired links';
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Delete expired links from the database';
 
     public function handle()
     {
-        $expiredLinks = Link::where('expires_at', '<=', Carbon::now())->get();
+        // Delete links where the expiration time has passed
+        Link::where('expires_at', '<', Carbon::now())->delete();
 
-        foreach ($expiredLinks as $link) {
-            $link->delete();
-            $this->info("Link {$link->unique_identifier} deleted because it has expired.");
-        }
+        $this->info('Expired links have been deleted successfully.');
     }
 }

@@ -10,10 +10,8 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
-    protected function schedule(Schedule $schedule): void
+    protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('links:delete-expired')->everyMinute();
     }
 
     /**
@@ -21,7 +19,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\DeleteExpiredLinks::class,
+
     ];
+
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
