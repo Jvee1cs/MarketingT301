@@ -262,62 +262,77 @@ class StudentController extends Controller
         
     }
     public function export(Request $request)
-    {// Retrieve selected student IDs from the form
-        $selectedstudentIds = $request->input('selected_students', []);
-    
+    {
+        // Retrieve selected student IDs from the form
+        $selectedStudentIds = $request->input('selected_students', []);
+        
         // Retrieve students based on the selected IDs
-        $students = student::whereIn('id', $selectedstudentIds)->get();
-    
+        $students = Student::whereIn('id', $selectedStudentIds)->get();
+        
         // Create a new PDF instance
         $pdf = new Dompdf();
-    
+        
         // Set options for PDF rendering
         $options = new Options();
         $options->set('defaultFont', 'Arial');
         $pdf->setOptions($options);
-    
+        
         // Start buffering the output
+        ob_start(); // To capture output in a buffer
+        
         // Begin PDF content
-    echo "<h1>student List</h1>";
-    echo "<table border='1' cellpadding='5'>
-        <tr>
-            <th>ID</th>
-            <th>stud_last_name</th>
-            <th>stud_first_name</th>
-            <th>stud_middle_name</th>
-            <th>address</th>
-            <th>city</th>
-            <th>grade_level</th>
-        </tr>";
+        echo "<h1>Student List</h1>";
+        echo "<table border='1' cellpadding='5'>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Grade Level</th>
+                <th>Strand</th>
+                <th>Course</th>
+                <th>School Name</th>
+                <th>Email Address</th>
+                <th>Phone no.</th>
+
+
+            </tr>";
+        
+        foreach ($students as $student) {
+            // Concatenate first name and last name to create a full name
+            $fullName = "{$student->stud_first_name} {$student->stud_middle_name} {$student->stud_last_name}";
     
-    foreach ($students as $student) {
-        echo "<tr>
-            <td>{$student->id}</td>
-            <td>{$student->stud_last_name}</td>
-            <td>{$student->stud_first_name}</td>
-            <td>{$student->stud_middle_name}</td>
-            <td>{$student->address}</td>
-            <td>{$student->city}</td>
-            <td>{$student->grade_level}</td>
-        </tr>";
-    }
-    echo "</table>";
+            echo "<tr>
+                <td>{$student->id}</td>
+                <td>{$fullName}</td>
+                <td>{$student->address}</td>
+                <td>{$student->city}</td>
+                <td>{$student->grade_level}</td>
+                <td>{$student->strand}</td>
+                <td>{$student->course}</td>
+                <td>{$student->school_name}</td>
+                <td>{$student->email_address}</td>
+                <td>{$student->phone}</td>
+            </tr>";
+        }
+        
+        echo "</table>";
+        
         // End buffering and assign the content to a variable
-        $html = ob_get_clean();
-    
+        $html = ob_get_clean(); // Retrieve the content from the buffer
+        
         // Load HTML content into the PDF
         $pdf->loadHtml($html);
-    
+        
         // Set paper size and orientation
         $pdf->setPaper('A4', 'landscape');
-    
+        
         // Render the PDF
         $pdf->render();
-    
+        
         // Output the PDF to the browser
         return $pdf->stream('students.pdf');
     }
-    
     public function bulkDelete(Request $request)
         {
             $studentIds = $request->input('student_ids');

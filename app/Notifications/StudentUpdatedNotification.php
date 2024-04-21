@@ -26,7 +26,7 @@ class StudentUpdatedNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'A student has been updated.',
+            'message' => 'Student: ' . $this->student->stud_first_name. ' has been updated.',
             'student_id' => $this->student->id,
         ];
     }

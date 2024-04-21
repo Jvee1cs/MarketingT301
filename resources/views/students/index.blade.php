@@ -16,10 +16,10 @@
                 <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Create New student</a>
                 
                 <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
-                <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected Data</button>
+                <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected</button>
                 <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete Selected</button>
-                <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send Email to Selected Students</button>
-                <button id="sendSMSButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send SMS to Selected Students</button>
+                <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send Email</button>
+                <button id="sendSMSButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send SMS</button>
 
                 <form action="{{ route('students.index') }}" method="GET" id="studentsearchForm" class="flex items-center">
                     @csrf

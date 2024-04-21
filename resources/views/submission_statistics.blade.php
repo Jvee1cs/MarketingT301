@@ -28,6 +28,8 @@
         <button id="toggleTotalStudents" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1" onclick="toggleVisibility('totalStudents')" data-name="Total Students">Hide Total Students</button>
         <button id="toggleStudentsBySchool" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1" onclick="toggleVisibility('studentsBySchool')" data-name="Students by School">Show Students by School</button>
         <button id="toggleTopCourses" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1" onclick="toggleVisibility('topCourses')" data-name="Top Courses">Show Top Courses</button>
+        <a href="{{ route('admin.dashboard') }}" class="text-white bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded mb-1">Back</a>
+
         
         <div id="totalStudents" class="mb-4">
     </br>

@@ -4,22 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Type" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create User</title>
     <!-- Link to Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 p-8">
-    <div class="container mx-auto max-w-lg bg-white shadow-lg rounded-lg p-8 m-20">
+    <div class="container mx-auto max-w-lg bg-white shadow-lg rounded-lg p-8 my-12">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-blue-900">Create User</h1>
-            <a href="{{ route('users.index') }}" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md font-semibold hover:bg-gray-300 transition duration-200 ease-in-out">Back</a>
+            <a href="{{ route('users.index') }}"
+                class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md font-semibold hover:bg-gray-300 transition duration-200 ease-in-out">
+                Back
+            </a>
         </div>
 
         <form action="{{ route('users.store') }}" method="POST" class="space-y-6">
             @csrf
-
             <div>
                 <label for="name" class="block text-gray-700 font-semibold mb-2">Name:</label>
                 <input type="text" id="name" name="name" required
@@ -47,7 +49,9 @@
                 </select>
             </div>
 
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition duration-200 ease-in-out">Submit</button>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition duration-200 ease-in-out">
+                Submit
+            </button>
         </form>
     </div>
 </body>

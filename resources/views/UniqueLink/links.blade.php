@@ -13,6 +13,8 @@
         <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Manage Links</h1>
         <div class="mb-4 flex flex-wrap justify-between items-center">
             <a href="{{ route('aics.gen') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Generate New Link</a>
+            <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
+
         </div>
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white rounded-lg overflow-hidden">

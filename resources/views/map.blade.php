@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locator Map</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Leaflet CSS -->
     <link href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -35,6 +36,10 @@
 <div class="container">
     <h1 class="mt-5 mb-4">Locator Map</h1>
     <!-- Dropdown for city selection -->
+    <div class="mb-2 flex flex-wrap justify-between items-center">
+            <a href="{{ route('admin.dashboard') }}" class="hover:bg-gray-100 text-blue-500 py-2 px-4 ">Go to Dashboard</a>
+
+        </div>
     <select id="cityDropdown" class="form-select mb-3">
         <option value="0">Select City</option>
         <option value="Parañaque">Parañaque</option>
@@ -63,16 +68,62 @@
         { name: "Baclaran Barangay Hall", coordinates: [14.512048954227579, 121.00547330128374] },
         { name: "Don Bosco Barangay Hall", coordinates: [14.482341504862227, 121.03751305719334] },
         { name: "La Huerta Barangay Hall", coordinates: [14.500708570342768, 120.99126755919006] },
-        // Add more barangay halls for Parañaque as needed
+        { name: "San Dionisio Barangay Hall", coordinates: [14.486140351006505, 120.99163465550478] },
+        { name: "San Isidro Barangay Hall", coordinates: [14.46936606882816, 121.01122898628086] },
+    { name: "San Martin de Porres Barangay Hall", coordinates: [14.494507111069916, 121.04229919384156] },
+    { name: "San Antonio Barangay Hall", coordinates: [14.469541966154063, 121.02412864564593] },
+    { name: "Santo Niño Barangay Hall", coordinates: [14.503053599085195, 120.99735806852621] },
+    { name: "Sun Valley Barangay Hall", coordinates: [14.488351663675717, 121.0370207427992] },
+    { name: "Tambo Barangay Hall", coordinates: [14.515357554444432, 120.99318789366357] },
+    { name: "Vitalez Barangay Hall", coordinates: [14.508294939725296, 121.00615304712613] },
+    { name: "Don Galo Barangay Hall", coordinates: [14.505417788679468, 120.99118538201954] },
+    { name: "Merville Barangay Hall", coordinates: [14.500212960950453, 121.02633460208392] },
+    { name: "Moonwalk Barangay Hall", coordinates: [14.495372020627217, 121.01074943733265] },
+    { name: "Marcelo Green Village Barangay Hall", coordinates: [14.47647155448698, 121.04008086546241] },
+    { name: "BF Homes Barangay Hall", coordinates: [14.446077762006897, 121.02727803459011] },
 
+        
+        // Add more barangay halls for Parañaque as needed
         { name: "Bagumbayan Barangay Hall", coordinates: [14.474246015393044, 121.059194598432] },
-        { name: "Barangay Hall 2 Taguig", coordinates: [14.5292, 121.0726] },
-        { name: "Barangay Hall 3 Taguig", coordinates: [14.5258, 121.0833] },
+        { name: "Bambang Barangay Hall", coordinates: [14.52594804597349, 121.07297053111895] },
+        { name: "Calzada Barangay Hall", coordinates: [14.533819710716877, 121.07996011577862] },
+        { name: "Central Bicutan Barangay Hall", coordinates: [14.493137289324427, 121.0541246662207] },
+        { name: "Central Signal Village Barangay Hall", coordinates: [14.511594715049993, 121.05653263599561] },
+        { name: "Fort Bonifacio Barangay Hall", coordinates: [14.526257243286665, 121.02676274732188] },
+        { name: "Hagonoy Barangay Hall", coordinates: [14.514546147547202, 121.06040718076763] },
+        { name: "Ibayo-Tipas Barangay Hall", coordinates: [14.542124479475271, 121.08461441470406] },
+        { name: "Katuparan Barangay Hall", coordinates: [14.521744324253872, 121.05839653539337] },
+        { name: "Ligid-Tipas Barangay Hall", coordinates: [14.543105809759323, 121.0800680877149] },
+        { name: "Lower Bicutan Barangay Hall", coordinates: [14.489770676360623, 121.06238595957377] },
+        { name: "Maharlika Village Barangay Hall", coordinates: [14.499563707313598, 121.05315458495025] },
+        { name: "Napindan Barangay Hall", coordinates: [14.541915041709414, 121.09595085887972] },
+        { name: "New Lower Bicutan Barangay Hall", coordinates: [14.50617996839134, 121.0654730784144] },
+        { name: "North Daang Hari Barangay Hall", coordinates: [14.486929897331429, 121.04799903951044] },
+        { name: "North Signal Village Barangay Hall", coordinates: [14.515862668454709, 121.05554727828344] },
+        { name: "Palingon Barangay Hall", coordinates: [14.538827251033425, 121.07999099715546] },
+        { name: "Pinagsama Barangay Hall", coordinates: [14.523900337659201, 121.0556388374284] },
+        { name: "San Miguel Barangay Hall", coordinates: [14.560790423635092, 121.04937558904383] },
+        { name: "Santa Ana Barangay Hall", coordinates: [14.547747120979707, 121.07164219561713] },
+        { name: "South Daang Hari Barangay Hall", coordinates: [14.472433244551697, 121.04859117429278] },
+        { name: "South Signal Village Barangay Hall", coordinates: [14.507676050100171, 121.0532722772929] },
+        { name: "Tanyag Barangay Hall", coordinates: [14.47884587837071, 121.0494138335467] },
+        { name: "Tuktukan Barangay Hall", coordinates: [14.528938285904168, 121.07160047553386] },
+        { name: "Upper Bicutan Barangay Hall", coordinates: [14.498044980952873, 121.05007530305548] },
+        { name: "Ususan Barangay Hall", coordinates: [14.536704808936241, 121.06857762987603] },
+        { name: "Wawa Barangay Hall", coordinates: [14.523510108703178, 121.07520438393692] },
+        { name: "Western Bicutan Barangay Hall", coordinates: [14.509909045782466, 121.03808731311645] },
+
         // Add more barangay halls for Taguig as needed
 
-        { name: "Alabang Barangay Hall", coordinates: [14.4075, 121.0458] },
-        { name: "Barangay Hall 2 Muntinlupa", coordinates: [14.5292, 121.0726] },
-        { name: "Barangay Hall 3 Muntinlupa", coordinates: [14.5258, 121.0833] },
+        { name: "Alabang Barangay Hall", coordinates: [14.421088886374685, 121.04414120129854] },
+        { name: "Bayanan Barangay Hall", coordinates: [14.413352858198134, 121.05211587870588] },
+        { name: "Cupang Barangay Hall", coordinates: [14.439959994061104, 121.05047131382794] },
+        { name: "New Alabang Barangay Hall", coordinates: [14.422538709057255, 121.04460156629385] },
+        { name: "Poblacion Barangay Hall", coordinates: [14.397137356246867, 121.0492184698046] },
+        { name: "Putatan Barangay Hall", coordinates: [14.39720673477013, 121.04841768200652] },
+        { name: "Sucat Barangay Hall", coordinates: [14.458037011071513, 121.05389792773003] },
+        { name: "Tunasan Barangay Hall", coordinates: [14.379459516707438, 121.04836952721334] },
+
         // Add more barangay halls for Muntinlupa as needed
     ];
 
@@ -94,7 +145,7 @@
     ];
     function getCurrentLocation() {
        // Geolocation code
-       resetMap();
+       
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var latitude = position.coords.latitude;
@@ -144,11 +195,11 @@
         barangayDropdown.innerHTML = '<option value="0">Select Barangay</option>';
         // Add options based on selected city
         if (selectedCity === 'Parañaque') {
-            addBarangaysToDropdown(['Baclaran', 'Don Bosco', 'La Huerta', 'San Dionisio', 'San Isidro', 'San Martin de Porres', 'San Antonio', 'San Juan', 'San Miguel', 'Santo Niño', 'Sun Valley', 'Tambo', 'Vitalez', 'Don Galo', 'Merville', 'Moonwalk', 'Santa Rita', 'Marcelo Green Village', 'BF Homes']);
+            addBarangaysToDropdown(['Baclaran', 'Don Bosco', 'La Huerta', 'San Dionisio', 'San Isidro', 'San Martin de Porres', 'San Antonio', 'Santo Niño', 'Sun Valley', 'Tambo', 'Vitalez', 'Don Galo', 'Merville', 'Moonwalk', 'Marcelo Green Village', 'BF Homes']);
         } else if (selectedCity === 'Taguig') {
-            addBarangaysToDropdown(['Bagumbayan', 'Barangay 2', 'Barangay 3', 'Barangay 4', 'Barangay 5', 'Barangay 6', 'Barangay 7', 'Barangay 8', 'Barangay 9', 'Barangay 10', 'Barangay 11', 'Barangay 12', 'Barangay 13', 'Barangay 14', 'Barangay 15']);
+            addBarangaysToDropdown(['Bagumbayan', 'Bambang', 'Calzada', 'Central Bicutan', 'Central Signal Village', 'Fort Bonifacio', 'Hagonoy', 'Ibayo-Tipas', 'Katuparan', 'Ligid-Tipas', 'Lower Bicutan', 'Maharlika Village', 'Napindan', 'New Lower Bicutan', 'North Daang Hari','North Signal Village','Palingon','Pinagsama','San Miguel','Santa Ana','South Daang Hari','South Signal Village','Tanyag','Tuktukan','Upper Bicutan','Ususan','Wawa','Western Bicutan']);
         } else if (selectedCity === 'Muntinlupa') {
-            addBarangaysToDropdown(['Alabang', 'Barangay 2', 'Barangay 3', 'Barangay 4', 'Barangay 5', 'Barangay 6', 'Barangay 7', 'Barangay 8', 'Barangay 9', 'Barangay 10', 'Barangay 11', 'Barangay 12', 'Barangay 13', 'Barangay 14', 'Barangay 15']);
+            addBarangaysToDropdown(['Alabang', 'Bayanan', 'Cupang', 'New Alabang Village', 'Poblacion', 'Putatan', 'Sucat', 'Tunasan']);
         }
     });
 
@@ -199,6 +250,7 @@
     function highlightBarangay(barangayName) {
         var selectedBarangayHall = barangayHalls.find(hall => hall.name.includes(barangayName));
         if (selectedBarangayHall) {
+            resetMap();
             L.marker(selectedBarangayHall.coordinates).addTo(map)
                 .bindPopup(selectedBarangayHall.name)
                 .openPopup();
