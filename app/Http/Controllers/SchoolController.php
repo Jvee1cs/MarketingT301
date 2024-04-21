@@ -53,6 +53,7 @@ class SchoolController extends Controller
             'name' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
+            'principal' => 'required|string',
             'contact' => 'required|string',
 
             // Add more validation rules as needed
@@ -80,6 +81,7 @@ class SchoolController extends Controller
             'name' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
+            'principal' => 'required|string',
             'contact' => 'required|string',
             // Add more validation rules as needed
         ]);

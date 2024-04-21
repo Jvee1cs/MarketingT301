@@ -19,6 +19,10 @@
                 <p class="text-gray-700">{{ $school->name }}</p>
             </div>
             <div>
+                <p class="text-lg font-bold mb-2">Principal:</p>
+                <p class="text-gray-700">{{ $school->principal }}</p>
+            </div>
+            <div>
                 <p class="text-lg font-bold mb-2">Address:</p>
                 <p class="text-gray-700">{{ $school->address }}</p>
             </div>

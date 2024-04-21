@@ -140,10 +140,10 @@ $(document).ready(function() {
         </div>
 
         <!-- Notification Section -->
-        <div class="notification-container text-blue-800 rounded-md fixed top-4 right-4 overflow-auto">
+        <div class="notification-container text-blue-800 rounded-md fixed top-10 right-5 overflow-auto">
             @if(auth()->check())
             @foreach(auth()->user()->unreadNotifications as $notification)
-            <div class="notification mb-2 bg-blue-200 border border-blue-300 p-4">
+            <div class="notification mt-2 bg-blue-200 border border-blue-300 py-2 px-2">
                 <span class="mr-2">{{ $notification->data['message'] }}</span>
                 <form action="{{ route('notifications.markAsRead', $notification->id) }}" method="POST"
                     class="inline">

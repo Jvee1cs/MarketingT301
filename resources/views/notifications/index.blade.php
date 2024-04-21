@@ -8,7 +8,7 @@
     <style>
         /* Custom styles can be added here */
         .unread {
-            background-color: #FDE68A; /* Soft yellow background for unread messages */
+            background-color: #FFFDD0; /* Soft yellow background for unread messages */
         }
     </style>
 </head>
@@ -34,7 +34,7 @@
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light">
                     @foreach($notifications as $notification)
-                        <tr class="border-b border-gray-200 hover:bg-gray-50 {{ $notification->read_at ? '' : 'unread' }}">
+                        <tr class="border-b border-gray-200 hover:bg-yellow-100 {{ $notification->read_at ? '' : 'unread' }}">
                             <td class="py-3 px-6 text-left">{{ $notification->data['message'] }}</td>
                             <td class="py-3 px-6 text-left">{{ $notification->created_at->format('M d, Y H:i:s') }}</td>
                             <td class="py-3 px-6 text-left">

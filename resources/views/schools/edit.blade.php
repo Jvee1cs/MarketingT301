@@ -18,6 +18,11 @@
                     class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
             </div>
             <div class="mb-4">
+                <label for="principal" class="block text-gray-700 font-bold mb-2">Principal:</label>
+                <input type="text" id="aprincipal" name="principal" value="{{ $school->principal }}" required
+                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
+            </div>
+            <div class="mb-4">
                 <label for="address" class="block text-gray-700 font-bold mb-2">Address:</label>
                 <input type="text" id="address" name="address" value="{{ $school->address }}" required
                     class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">

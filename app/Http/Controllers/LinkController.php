@@ -10,7 +10,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
-
+use App\Models\Cities;
+use App\Models\Course;
+use App\Models\Strand;
 class LinkController extends Controller
 {
     private function deleteExpiredLinks()
@@ -83,8 +85,11 @@ class LinkController extends Controller
     public function create()
     {
         // Fetch all school names from the database
+        $strands = Strand::pluck('strand', 'id');
+        $courses = Course::pluck('course', 'id');
+        $cities = Cities::pluck('city', 'id');
         $schools = School::pluck('name', 'id');
-        return view('/UniqueLink/aics', compact('schools'));
+        return view('/UniqueLink/aics', compact('schools','cities','courses','strands'));
     }
 
     private function generateQrCode($url)
