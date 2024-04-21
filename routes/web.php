@@ -181,3 +181,4 @@ Route::get('/welcome', function () {
 Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
 Route::get('/map', [MapController::class, 'showMap'])->name('map.show');
 Route::get('/submission-statistics', [StudentController::class, 'statistics'])->name('submission.statistics');
+Route::post('/send-sms', [StudentController::class, 'sendSMS'])->name('students.sendSMS');

@@ -24,7 +24,7 @@ class StudentCreatedNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'A new student: '. $this->student->stud_first_name. 'has been created.',
+            'message' => 'A new student: '. $this->student->stud_first_name. ' has been created.',
             'student_id' => $this->student->id,
             'action_url' => '/students/' . $this->student->id,
         ];

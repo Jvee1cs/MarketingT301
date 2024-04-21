@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Twilio\Exceptions\RestException;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -24,6 +25,7 @@ use App\Models\Course;
 use App\Models\Strand;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Twilio\Rest\Client;
 
 class StudentController extends Controller
 {
@@ -32,6 +34,56 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+      public function sendSMS(Request $request)
+    {
+        // Validate the request data
+    $request->validate([
+        'selected_students' => 'required|array',
+        'selected_students.*' => 'exists:students,id',
+        'sms_message' => 'required|string|max:160', // Adjust the max length as per your SMS service provider's limitations
+    ]);
+
+    // Get the selected student IDs from the request
+    $selectedStudents = $request->input('selected_students');
+
+    // Fetch the students from the database
+    $students = Student::whereIn('id', $selectedStudents)->get();
+
+    // Initialize Twilio client with your Twilio credentials
+    $sid = env('TWILIO_SID');
+    $token = env('TWILIO_AUTH_TOKEN');
+    $twilioPhoneNumber = env('TWILIO_PHONE_NUMBER');
+    $twilio = new Client($sid, $token);
+
+    // Loop through the selected students and send SMS message to each one
+    foreach ($students as $student) {
+        try {
+            // Prepend the country code for the Philippines ('+63') to the phone number
+            $phoneNumber = '+63' . substr($student->phone, 1);
+
+            $twilio->messages->create(
+                $phoneNumber, // Student's phone number with country code
+                [
+                    'from' => $twilioPhoneNumber, // Your Twilio phone number
+                    'body' => $request->input('sms_message'),
+                ]
+            );
+        } catch (RestException $e) {
+            // Log any errors that occur during SMS sending
+            \Log::error('Error sending SMS to student ' . $student->id . ': ' . $e->getMessage());
+            // Optionally, you can handle errors here based on your application's requirements
+        }
+    }
+
+    // Redirect back or to a specific route after sending the SMS messages
+    return redirect()->back()->with('status', 'SMS messages sent successfully');
+    }
+
+    // Other controller methods...
+
+
+
     public function sendEmail(Request $request)
     {
         // Validate the request data
@@ -255,6 +307,7 @@ class StudentController extends Controller
 
     }
     public function export(Request $request)
+<<<<<<< HEAD
     {// Retrieve selected student IDs from the form
         $selectedstudentIds = $request->input('selected_students', []);
 
@@ -264,13 +317,32 @@ class StudentController extends Controller
         // Create a new PDF instance
         $pdf = new Dompdf();
 
+=======
+    {
+        // Retrieve selected student IDs from the form
+        $selectedStudentIds = $request->input('selected_students', []);
+        
+        // Retrieve students based on the selected IDs
+        $students = Student::whereIn('id', $selectedStudentIds)->get();
+        
+        // Create a new PDF instance
+        $pdf = new Dompdf();
+        
+>>>>>>> b6f9231f065b19c639309a6358e04b323806da93
         // Set options for PDF rendering
         $options = new Options();
         $options->set('defaultFont', 'Arial');
         $pdf->setOptions($options);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> b6f9231f065b19c639309a6358e04b323806da93
         // Start buffering the output
+        ob_start(); // To capture output in a buffer
+        
         // Begin PDF content
+<<<<<<< HEAD
     echo "<h1>student List</h1>";
     echo "<table border='1' cellpadding='5'>
         <tr>
@@ -311,6 +383,60 @@ class StudentController extends Controller
         return $pdf->stream('students.pdf');
     }
 
+=======
+        echo "<h1>Student List</h1>";
+        echo "<table border='1' cellpadding='5'>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Grade Level</th>
+                <th>Strand</th>
+                <th>Course</th>
+                <th>School Name</th>
+                <th>Email Address</th>
+                <th>Phone no.</th>
+
+
+            </tr>";
+        
+        foreach ($students as $student) {
+            // Concatenate first name and last name to create a full name
+            $fullName = "{$student->stud_first_name} {$student->stud_middle_name} {$student->stud_last_name}";
+    
+            echo "<tr>
+                <td>{$student->id}</td>
+                <td>{$fullName}</td>
+                <td>{$student->address}</td>
+                <td>{$student->city}</td>
+                <td>{$student->grade_level}</td>
+                <td>{$student->strand}</td>
+                <td>{$student->course}</td>
+                <td>{$student->school_name}</td>
+                <td>{$student->email_address}</td>
+                <td>{$student->phone}</td>
+            </tr>";
+        }
+        
+        echo "</table>";
+        
+        // End buffering and assign the content to a variable
+        $html = ob_get_clean(); // Retrieve the content from the buffer
+        
+        // Load HTML content into the PDF
+        $pdf->loadHtml($html);
+        
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+        
+        // Render the PDF
+        $pdf->render();
+        
+        // Output the PDF to the browser
+        return $pdf->stream('students.pdf');
+    }
+>>>>>>> b6f9231f065b19c639309a6358e04b323806da93
     public function bulkDelete(Request $request)
         {
             $studentIds = $request->input('student_ids');

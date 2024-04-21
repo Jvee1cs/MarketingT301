@@ -16,6 +16,7 @@
     <div class="container mx-auto p-4 md:p-8">
         <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Notification Center</h1>
 
+
         @if(session('success'))
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
                 <p>{{ session('success') }}</p>
