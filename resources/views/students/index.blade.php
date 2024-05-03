@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student List</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4 md:p-8">
@@ -13,13 +14,24 @@
             <h1 class="text-3xl md:text-4xl font-semibold mb-4 md:mb-8 text-blue-900">Student List</h1> 
             
             <div class="space-x-4 flex items-center">
-                <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Create New student</a>
+            <a href="{{ route('students.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+        <i class="fas fa-user-plus"></i> Create New Student
+    </a>
                 
-                <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Go to Dashboard</a>
-                <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">Export Selected</button>
-                <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete Selected</button>
-                <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send Email</button>
-                <button id="sendSMSButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Send SMS</button>
+    <a href="{{ route('admin.dashboard') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+    </a>                <button type="button" id="exportButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+        <i class="fas fa-file-export"></i> Export Selected
+    </button>
+    
+    <button id="deleteSelected" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+        <i class="fas fa-trash-alt"></i> Delete Selected
+    </button>
+    
+    <button id="sendEmailButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        <i class="fas fa-envelope"></i> Send Email
+    </button>
+                <button id="sendSMSButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fas fa-sms"></i> Send SMS</button>
 
                 <form action="{{ route('students.index') }}" method="GET" id="studentsearchForm" class="flex items-center">
                     @csrf
@@ -113,6 +125,24 @@
             </div>
         </div>
     </div>
+    <!-- Spinner (hidden by default) -->
+<div id="spinner" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
+    <div class="text-white text-4xl">
+        <i class="fas fa-spinner fa-spin"></i> Processing...
+    </div>
+</div>
+<!-- Success Message Modal -->
+<div id="successModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 hidden">
+  <div class="flex items-center justify-center h-full">
+    <div class="bg-white p-8 rounded shadow-lg text-center">
+      <i class="fas fa-check-circle text-green-500 text-6xl"></i>
+      <h2 class="text-2xl font-semibold text-gray-900 my-4">Operation Successful</h2>
+      <p class="text-gray-700">Your emails have been sent successfully!</p>
+      <button id="closeSuccessModal" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">OK</button>
+    </div>
+  </div>
+</div>
+
     <script src="{{ asset('js/student/student.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -133,31 +163,40 @@
     });
 });
 $(document).ready(function() {
-    $('#sendEmailButton').click(function() {
-        // Get the IDs of selected students
-        var selectedStudents = [];
-        $('input[name="selected_students[]"]:checked').each(function() {
-            selectedStudents.push($(this).val());
-        });
+  $('#sendEmailButton').click(function() {
+    // Show the spinner
+    $('#spinner').removeClass('hidden');
 
-        // Send a POST request to your server
-        $.ajax({
-            url: '{{ route("send.email") }}',
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                selected_students: selectedStudents
-            },
-            success: function(response) {
-                // Handle success response, if needed
-                alert('Emails sent successfully');
-            },
-            error: function(xhr, status, error) {
-                // Handle error response, if needed
-                console.error('Error sending emails:', error);
-            }
-        });
+    var selectedStudents = [];
+    $('input[name="selected_students[]"]:checked').each(function() {
+      selectedStudents.push($(this).val());
     });
+
+    $.ajax({
+      url: '{{ route("send.email") }}',
+      type: 'POST',
+      data: {
+        _token: '{{ csrf_token() }}',
+        selected_students: selectedStudents
+      },
+      success: function(response) {
+        // Hide the spinner and show the success message
+        $('#spinner').addClass('hidden');
+        $('#successModal').removeClass('hidden'); // Show the success modal
+      },
+      error: function(xhr, status, error) {
+        // Hide the spinner and handle errors
+        $('#spinner').addClass('hidden');
+        console.error('Error sending emails:', error);
+        alert('Failed to send emails. Please try again.');
+      }
+    });
+  });
+
+  // Close the success modal
+  $('#closeSuccessModal').click(function() {
+    $('#successModal').addClass('hidden');
+  });
 });
 // Show SMS message modal when "Send SMS to Selected Students" button is clicked
 $('#sendSMSButton').click(function() {
