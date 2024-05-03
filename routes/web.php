@@ -82,7 +82,10 @@ Route::middleware(['auth', 'user'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
-
+    Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
+Route::get('/map', [MapController::class, 'showMap'])->name('map.show');
+Route::get('/submission-statistics', [StudentController::class, 'statistics'])->name('submission.statistics');
+Route::post('/send-sms', [StudentController::class, 'sendSMS'])->name('students.sendSMS');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::delete('/notifications/{notificationId}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
     Route::put('notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
@@ -178,7 +181,4 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
-Route::get('/map', [MapController::class, 'showMap'])->name('map.show');
-Route::get('/submission-statistics', [StudentController::class, 'statistics'])->name('submission.statistics');
-Route::post('/send-sms', [StudentController::class, 'sendSMS'])->name('students.sendSMS');
+
