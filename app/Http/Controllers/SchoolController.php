@@ -12,8 +12,43 @@ use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SchoolEmail;
+use Illuminate\Support\Str; // Add this line
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Twilio\Rest\Client;
+
 class SchoolController extends Controller
 {
+/**
+     * Display a listing of the students.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+     public function sendEmail(Request $request)
+     {
+         // Validate the request data
+         $request->validate([
+             'selected_schools' => 'required|array',
+             'selected_schools.*' => 'exists:schools,id',
+         ]);
+ 
+         // Get the selected student IDs from the request
+         $selectedSchools = $request->input('selected_schools');
+ 
+         // Fetch the students from the database
+         $schools = School::whereIn('id', $selectedSchools)->get();
+ 
+         // Loop through the selected students and send email to each one
+         foreach ($schools as $school) {
+             Mail::to($school->email_address)->send(new SchoolEmail($school));
+         }
+ 
+         // Redirect back or to a specific route after sending the emails
+         return redirect()->back()->with('status', 'Emails sent successfully');
+     }
     public function index()
     {
 
@@ -55,6 +90,7 @@ class SchoolController extends Controller
             'city' => 'required|string',
             'principal' => 'required|string',
             'contact' => 'required|string',
+            'email_address'=> 'required|string',
 
             // Add more validation rules as needed
         ]);
@@ -83,6 +119,7 @@ class SchoolController extends Controller
             'city' => 'required|string',
             'principal' => 'required|string',
             'contact' => 'required|string',
+            'email_address'=> 'required|string',
             // Add more validation rules as needed
         ]);
 
@@ -120,24 +157,22 @@ class SchoolController extends Controller
 echo "<h1>School List</h1>";
 echo "<table border='1' cellpadding='5'>
     <tr>
-        <th>ID</th>
         <th>Name</th>
-        <th>Username</th>
-        <th>Password</th>
+        <th>Principal</th>
         <th>Email</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Contact</th>
     </tr>";
 
 foreach ($schools as $school) {
     echo "<tr>
-        <td>{$school->id}</td>
         <td>{$school->name}</td>
-        <td>{$school->username}</td>
-        <td>{$school->password}</td>
-        <td>{$school->email}</td>
-        <td>{$school->created_at}</td>
-        <td>{$school->updated_at}</td>
+        <td>{$school->principal}</td>
+        <td>{$school->email_address}</td>
+        <td>{$school->address}</td>
+        <td>{$school->city}</td>
+        <td>{$school->contact}</td>
     </tr>";
 }
 echo "</table>";

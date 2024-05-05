@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\HelpController;
 
 use App\Http\Controllers\NotificationController;
 
@@ -82,6 +83,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     // Routes that require authentication
+    Route::post('/send-school', [SchoolController::class, 'sendEmail'])->name('emailschool');
     Route::post('/send-email', [StudentController::class, 'sendEmail'])->name('send.email');
 Route::get('/map', [MapController::class, 'showMap'])->name('map.show');
 Route::get('/submission-statistics', [StudentController::class, 'statistics'])->name('submission.statistics');
@@ -180,5 +182,6 @@ Route::post('/aics/store', [LinkController::class, 'store'])
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
+Route::get('/help', [HelpController::class, 'index'])
+->name('help');
 

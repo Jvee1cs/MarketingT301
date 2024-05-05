@@ -73,15 +73,17 @@
             <div>
                 <label for="grade_level" class="block text-sm font-medium text-gray-700">Grade Level *</label>
                 <select id="grade_level" name="grade_level" required
-                    class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
+                class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg"
+                    onchange="toggleCourseVisibility()">
                     <option value="">Please select grade level</option>
                     <option value="10">Grade 10</option>
                     <option value="12">Grade 12</option>
+                    
                 </select>
             </div>
             <!-- Desired Strand & Course -->
             <div>
-                <label for="strand" class="block text-sm font-medium text-gray-700">Desired Strand *</label>
+                <label for="strand" class="block text-sm font-medium text-gray-700">Strand *</label>
                 <select id="strand" name="strand" required
                 class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                 <option value="">Please select strands</option>
@@ -90,10 +92,10 @@
                 @endforeach
             </select>
             </div>
-            <div>
-                <label for="course" class="block text-sm font-medium text-gray-700">Course *</label>
-                <select id="course" name="course" required
-                class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
+            <div id="course_section" style="display: none;">
+                <label for="course" class="block text-sm font-medium text-gray-700">Desired Course *</label>
+                <select id="course" name="course"
+                    class="mt-1 w-full rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-base px-3 py-2 text-lg">
                 <option value="">Please select courses</option>
                 @foreach($courses as $id => $course)
                     <option value="{{ $course }}">{{ $course }}</option>
@@ -149,6 +151,21 @@
             </div>
         </form>
     </div>
+    <script>
+    function toggleCourseVisibility() {
+        const gradeLevel = document.getElementById("grade_level").value;
+        const courseSection = document.getElementById("course_section");
+        
+        if (gradeLevel === "12") {
+            courseSection.style.display = "block";
+        } else {
+            courseSection.style.display = "none";
+        }
+    }
+
+    // Ensure the visibility is correct when the page loads
+    document.addEventListener("DOMContentLoaded", toggleCourseVisibility);
+    </script>
 </body>
 
 </html>

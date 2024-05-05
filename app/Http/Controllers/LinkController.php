@@ -63,7 +63,7 @@ class LinkController extends Controller
             'city' => 'required|string',
             'grade_level' => 'required|integer',
             'strand' => 'required|string',
-            'course' => 'required|string',
+            'course' => 'nullable|string',
             'school_name' => 'required|string',
             'g_name' => 'required|string',
             'g_phone' => 'required|string|max:11',

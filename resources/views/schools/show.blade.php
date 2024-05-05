@@ -34,6 +34,10 @@
                 <p class="text-lg font-bold mb-2">Contact:</p>
                 <p class="text-gray-700">{{ $school->contact }}</p>
             </div>
+            <div>
+                <p class="text-lg font-bold mb-2">Email:</p>
+                <p class="text-gray-700">{{ $school->email_address }}</p>
+            </div>
         </div>
     </div>
 </body>

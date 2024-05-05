@@ -132,7 +132,7 @@ class StudentController extends Controller
     }
 
     // Paginate the filtered students
-    $students = $studentsQuery->orderBy('stud_first_name')->paginate(15);
+    $students = $studentsQuery->orderBy('created_at', 'desc' )->paginate(15);
 
     // Fetch distinct school names from the database
     $schools = Student::distinct()->pluck('school_name');
@@ -224,7 +224,7 @@ class StudentController extends Controller
             'city' => 'required|string',
             'grade_level' => 'required|integer',
             'strand' => 'required|string',
-            'course' => 'required|string',
+            'course' => 'nullable|string',
             'school_name' => 'required|string',
             'g_name' => 'required|string',
             'g_phone' => 'required|string|max:11',
@@ -272,7 +272,7 @@ class StudentController extends Controller
             'city' => 'required|string',
             'grade_level' => 'required|integer',
             'strand' => 'required|string',
-            'course' => 'required|string',
+            'course' => 'nullable|string',
             'school_name' => 'required|string',
             'g_name' => 'required|string',
             'g_phone' => 'required|string|max:11',
@@ -329,6 +329,7 @@ class StudentController extends Controller
         echo "<h1>Student List</h1>";
         echo "<table border='1' cellpadding='5'>
             <tr>
+                <th>#</th>
                 <th>ID</th>
                 <th>Full Name</th>
                 <th>Address</th>
@@ -342,12 +343,14 @@ class StudentController extends Controller
 
 
             </tr>";
-        
+         // Initialize a counter variable to keep track of the row numbers
+    $rowCount = 1;
         foreach ($students as $student) {
             // Concatenate first name and last name to create a full name
             $fullName = "{$student->stud_first_name} {$student->stud_middle_name} {$student->stud_last_name}";
     
             echo "<tr>
+            <td>{$rowCount}</td>
                 <td>{$student->id}</td>
                 <td>{$fullName}</td>
                 <td>{$student->address}</td>
@@ -359,6 +362,8 @@ class StudentController extends Controller
                 <td>{$student->email_address}</td>
                 <td>{$student->phone}</td>
             </tr>";
+            // Increment the row counter
+        $rowCount++;
         }
         
         echo "</table>";

@@ -33,10 +33,16 @@
                     class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
             </div>
             <div class="mb-4">
-                <label for="country" class="block text-gray-700 font-bold mb-2">Contact:</label>
+                <label for="contact" class="block text-gray-700 font-bold mb-2">Contact:</label>
                 <input type="text" id="contact" name="contact" value="{{ $school->contact}}" required
                     class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
             </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+                <input type="text" id="email" name="email" value="{{ $school->email_address}}" required
+                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400">
+            </div>
+            
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Update School</button>
         </form>
     </div>
