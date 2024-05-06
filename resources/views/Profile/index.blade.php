@@ -17,7 +17,7 @@
             <div class="hidden md:block">
                 <span class="text-white">{{ Auth::user()->name }}</span>
                 <span class="text-white mx-4">|</span>
-                <a href="#" class="text-white hover:text-gray-200">Edit Profile</a>
+                <a href="{{ route('profile.edit') }}" class="text-white hover:text-gray-200">Edit Profile</a>
             </div>
         </div>
     </nav>
@@ -30,7 +30,11 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ROLE</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ Auth::user()->role }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 uppercase">{{ Auth::user()->role }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Username:</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ Auth::user()->username }}</td>
                     </tr>
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Name:</td>

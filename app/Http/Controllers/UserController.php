@@ -116,7 +116,25 @@ public function index(Request $request)
     {
         return view('users.edit', compact('user'));
     }
+    public function editProfile(){
+        $user = Auth::user();
 
+        return view('profile.edit', ['user' => $user]);
+    }
+    public function updateProfile(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+            'username' => 'required|string|max:255|unique:users,username,' . Auth::id(),
+
+        ]);
+        $user = Auth::user();
+        $user->update($validatedData);
+        
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+
+    }
+    
     // Update method for updating the specified user in the database
     public function update(Request $request, User $user)
     {

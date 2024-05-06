@@ -129,9 +129,9 @@ Route::post('/notifications/update', [NotificationController::class, 'updateThre
 Route::get('/notifications/settings', function () {
     return view('notifications.settings');
 })->name('notifications.settings');
-
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-
+Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 // Define the route for generating a unique link
 // Route for the page to generate links
 Route::get('/generate-link', [LinkController::class, 'generateLinkPage'])->name('aics.gen');
