@@ -57,6 +57,7 @@ $(document).ready(function() {
             <li><a href="{{ route('notifications.index') }}" class="block py-2 px-4 hover:bg-blue-800">Notification</a>
             <li><a href="{{ route('submission.statistics') }}" class="block py-2 px-4 hover:bg-blue-800">Statistics</a>
             <li><a href="{{ route('map.show') }}" class="block py-2 px-4 hover:bg-blue-800">Map</a>
+            <li><a href="{{ route('HELP') }}" class="block py-2 px-4 hover:bg-blue-800">Help & Support</a>
             </li>
         </ul>
         <div class="mt-auto py-4 px-4">

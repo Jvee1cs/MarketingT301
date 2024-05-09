@@ -50,6 +50,8 @@ Route::delete('/schools/{school}', [SchoolController::class, 'destroy'])->name('
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
 
+Route::get('/HELP', [HelpController::class, 'index'])->name('HELP');
+
 
 
 // Define the route for user records
@@ -121,6 +123,8 @@ Route::get('/students/{student}', [StudentController::class, 'show'])->name('stu
 Route::post('/students/bulk-delete',  [StudentController::class, 'bulkDelete'])->name('students.bulk-delete');
 Route::post('/students/export', [StudentController::class, 'export'])->name('students.export');
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+
+
 
 
 

@@ -14,7 +14,7 @@
     <div class="flex justify-center items-center h-screen">
         <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mx-4">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-bold text-blue-900">Add New Strand</h1>
+                <h1 class="text-3xl font-bold text-blue-900">Add New Course</h1>
 
                 <a href="{{ route('admin.dashboard') }}" onclick="history.back()"
                     class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md font-semibold hover:bg-gray-300 transition duration-200 ease-in-out">Back to Dashboard</a>

@@ -72,12 +72,18 @@
         /* Adjust main content to avoid overlap with sidebar */
         .main-content {
             margin-right: 270px; /* Provide enough space for the sidebar */
-            
+
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
     <div class="container mx-auto px-6 py-4">
+        <a href="#" onclick="history.go(-1)" class="text-blue-500 hover:text-blue-700 focus:outline-none mr-4">
+            <svg class="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to dashboard
+        </a>
         <h1 class="text-3xl font-bold text-center text-blue-900">Help & Support</h1>
         <p class="text-lg text-center mb-8 text-gray-600">Find guidance on how to use the system and answers to common questions.</p>
 <!-- Sidebar toggle button -->
@@ -92,6 +98,7 @@
     <button onclick="scrollToSection('#system-navigation')">System Navigation</button>
     <button onclick="scrollToSection('#working-with-records')">Working with Records</button>
     <button onclick="scrollToSection('#faqs')">FAQs</button>
+    <button onclick="scrollToSection('#dashboard')">How to use dashboard</button>
     <button onclick="scrollToSection('#further-assistance')">Further Assistance</button>
 </div>
 
@@ -147,7 +154,305 @@
                 <p class="text-gray-700">Click on the 'Logout' button in the sidebar to safely log out of the system.</p>
             </div>
         </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">How to use Dashboard?</h2>
+            <p class="mt-4 text-gray-700">Welcome to the Marketing Dashboard! To get started, follow these simple steps:</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/dashboard.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
 
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Student Records</h2>
+            <p class="mt-4 text-gray-700">Here is the Student Records</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotostudent.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Student Records</h2>
+            <p class="mt-4 text-gray-700">Here is the Student Records</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/studentarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+            <section class="mb-10" id="dashboard">
+                <h2 class="text-2xl font-semibold text-blue-900">Generate Form Link</h2>
+                <p class="mt-4 text-gray-700">Here is the Generate Form link</p>
+                <ol class="list-decimal list-inside mt-4 text-gray-700">
+                    <li>This is the Marketing Dashboard</li>
+                    <img src="{{ asset('image/gotolink.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                    <li>Once logged in, you will see this dashboard.</li>
+                    <li>And you can start working whatever you want to do with it.</li>
+                </ol>
+            </section>
+            <section class="mb-10" id="dashboard">
+                <h2 class="text-2xl font-semibold text-blue-900">Generate Form Link</h2>
+                <p class="mt-4 text-gray-700">Here is the Generate Form Link</p>
+                <ol class="list-decimal list-inside mt-4 text-gray-700">
+                    <li>This is the Marketing Dashboard</li>
+                    <img src="{{ asset('image/linkarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                    <li>Once logged in, you will see this dashboard.</li>
+                    <li>And you can start working whatever you want to do with it.</li>
+                </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add new course</h2>
+            <p class="mt-4 text-gray-700">Here is the Add new course</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotocourse.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add new course</h2>
+            <p class="mt-4 text-gray-700">Here is the Add new course</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/coursearea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+    </section>
+    <section class="mb-10" id="dashboard">
+        <h2 class="text-2xl font-semibold text-blue-900">Add new strand</h2>
+        <p class="mt-4 text-gray-700">Here is the Add new strand</p>
+        <ol class="list-decimal list-inside mt-4 text-gray-700">
+            <li>This is the Marketing Dashboard</li>
+            <img src="{{ asset('image/gotostrand.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+            <li>Once logged in, you will see this dashboard.</li>
+            <li>And you can start working whatever you want to do with it.</li>
+        </ol>
+    </section>
+    <section class="mb-10" id="dashboard">
+        <h2 class="text-2xl font-semibold text-blue-900">Add new strand</h2>
+        <p class="mt-4 text-gray-700">Here is the Add new strand</p>
+        <ol class="list-decimal list-inside mt-4 text-gray-700">
+            <li>This is the Marketing Dashboard</li>
+            <img src="{{ asset('image/strandarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+            <li>Once logged in, you will see this dashboard.</li>
+            <li>And you can start working whatever you want to do with it.</li>
+        </ol>
+</section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">School Records</h2>
+            <p class="mt-4 text-gray-700">Here is the School Records</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotoschool.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">School Records</h2>
+            <p class="mt-4 text-gray-700">Here is the School Records</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/schoolarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add target school</h2>
+            <p class="mt-4 text-gray-700">Here is the Add target school</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gototargetschool.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add target school</h2>
+            <p class="mt-4 text-gray-700">Here is the Add target school</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/targetschoolarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add taget cities</h2>
+            <p class="mt-4 text-gray-700">Here is the Add taget cities</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gototargetcities.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add target cities</h2>
+            <p class="mt-4 text-gray-700">Here is the Add target cities</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/targetcitiesarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">User Records</h2>
+            <p class="mt-4 text-gray-700">Here is the User Records</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotouser.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">User Records</h2>
+            <p class="mt-4 text-gray-700">Here is the User Records</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/userarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add login record</h2>
+            <p class="mt-4 text-gray-700">Here is the Add login record</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotoaddloginrecord.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Add login record</h2>
+            <p class="mt-4 text-gray-700">Here is the Add login record</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/addloginrecordarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Profile</h2>
+            <p class="mt-4 text-gray-700">Here is the Profile</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotoprofile.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Profile</h2>
+            <p class="mt-4 text-gray-700">Here is the Profile</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/profilearea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Notification</h2>
+            <p class="mt-4 text-gray-700">Here is the Notification</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotonotification.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Notification</h2>
+            <p class="mt-4 text-gray-700">Here is the Notification</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/notificationarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Statistics</h2>
+            <p class="mt-4 text-gray-700">Here is the Statistics</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotostatistics.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Statistics</h2>
+            <p class="mt-4 text-gray-700">Here is the Statistics</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/statisticsarea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Map</h2>
+            <p class="mt-4 text-gray-700">Here is the Map</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/gotomap.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
+        <section class="mb-10" id="dashboard">
+            <h2 class="text-2xl font-semibold text-blue-900">Map</h2>
+            <p class="mt-4 text-gray-700">Here is the Map</p>
+            <ol class="list-decimal list-inside mt-4 text-gray-700">
+                <li>This is the Marketing Dashboard</li>
+                <img src="{{ asset('image/maparea.png') }}" alt="Getting Started" > <!-- Example image for illustration -->
+
+                <li>Once logged in, you will see this dashboard.</li>
+                <li>And you can start working whatever you want to do with it.</li>
+            </ol>
+        </section>
         <section id="further-assistance">
             <h2 class="text-2xl font-semibold text-blue-900">Need Further Assistance?</h2>
             <p class="mt-4 text-gray-700">If you have additional questions or need further assistance, please contact our support team at support@example.com. We are here to help!</p>

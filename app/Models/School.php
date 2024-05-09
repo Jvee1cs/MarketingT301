@@ -16,8 +16,6 @@ class School extends Model
         'name',
         'address',
         'city',
-        'principal',
-        'contact',
-        'email_address'
+        'contact'
     ];
 }
