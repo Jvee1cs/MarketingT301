@@ -34,18 +34,18 @@ class SchoolController extends Controller
              'selected_schools' => 'required|array',
              'selected_schools.*' => 'exists:schools,id',
          ]);
- 
+
          // Get the selected student IDs from the request
          $selectedSchools = $request->input('selected_schools');
- 
+
          // Fetch the students from the database
          $schools = School::whereIn('id', $selectedSchools)->get();
- 
+
          // Loop through the selected students and send email to each one
          foreach ($schools as $school) {
              Mail::to($school->email_address)->send(new SchoolEmail($school));
          }
- 
+
          // Redirect back or to a specific route after sending the emails
          return redirect()->back()->with('status', 'Emails sent successfully');
      }
