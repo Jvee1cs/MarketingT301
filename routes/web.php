@@ -9,7 +9,7 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\HelpController;
-
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -184,4 +184,15 @@ Route::get('/welcome', function () {
 });
 Route::get('/help', [HelpController::class, 'index'])
 ->name('help');
+
+
+Route::get('/normform/cities', [FormController::class, 'indexCities'])->name('normform.cities');
+Route::delete('/normform/cities/{city}', [FormController::class, 'destroyCities'])->name('normform.destroyCities');
+
+Route::get('/normform/course', [FormController::class, 'indexCourse'])->name('normform.course');
+Route::delete('/normform/course/{course}', [FormController::class, 'destroyCourse'])->name('normform.destroyCourse');
+
+Route::get('/normform/strand', [FormController::class, 'indexStrand'])->name('normform.strand');
+Route::delete('/normform/strand/{strand}', [FormController::class, 'destroyStrand'])->name('normform.destroyStrand');
+Route::get('/normform', [FormController::class, 'index'])->name('normform.index');
 

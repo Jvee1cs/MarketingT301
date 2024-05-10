@@ -76,7 +76,7 @@ class SchoolController extends Controller
 
             Cities::create($request->all());
 
-            return redirect()->route('schools.index')
+            return redirect()->route('normform.cities')
                 ->with('success', 'School created successfully');
 
     }

@@ -162,7 +162,7 @@ class StudentController extends Controller
 
             Course::create($request->all());
 
-            return redirect()->route('students.records')
+            return redirect()->route('normform.course')
                 ->with('success', 'Course created successfully');
 
     }
@@ -182,7 +182,7 @@ class StudentController extends Controller
 
             Strand::create($request->all());
 
-            return redirect()->route('students.records')
+            return redirect()->route('normform.strand')
                 ->with('success', 'Strand created successfully');
 
     }
