@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('contact');
+            $table->string('principal');
+            $table->string('email_address');
             $table->timestamps();
         });
     }

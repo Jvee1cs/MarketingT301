@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('g_phone');
             $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\School;
-use Illuminate\Support\Facades\Auth; // Add this line
-use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Foundation\Validation\ValidatesRequests; 
 use App\Exports\StudentExport;
 use App\Models\Cities;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,7 +14,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SchoolEmail;
-use Illuminate\Support\Str; // Add this line
+use Illuminate\Support\Str; 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Twilio\Rest\Client;
@@ -120,7 +120,7 @@ class SchoolController extends Controller
             'principal' => 'required|string',
             'contact' => 'required|string',
             'email_address'=> 'required|string',
-            // Add more validation rules as needed
+            
         ]);
 
         $school->update($request->all());

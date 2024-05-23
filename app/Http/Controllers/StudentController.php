@@ -6,9 +6,9 @@ use Twilio\Exceptions\RestException;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\School;
-use Illuminate\Support\Str; // Add this line
-use Illuminate\Support\Facades\Auth; // Add this line
-use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
+use Illuminate\Support\Str; 
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Foundation\Validation\ValidatesRequests; 
 use App\Exports\StudentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -79,9 +79,6 @@ class StudentController extends Controller
     // Redirect back or to a specific route after sending the SMS messages
     return redirect()->back()->with('status', 'SMS messages sent successfully');
     }
-
-    // Other controller methods...
-
 
 
     public function sendEmail(Request $request)

@@ -42,7 +42,7 @@ class AdminController extends Controller
         'name' => 'required|string',
         'username' => 'required|string',
         'password' => 'required|string',
-        // Add more validation rules as needed
+        
     ]);
 
     Login::create([

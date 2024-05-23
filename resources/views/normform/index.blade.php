@@ -49,7 +49,7 @@
             <a href="{{ route('students.course') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
                 Add New Course
             </a>
-            <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:text-blue-900 font-semibold py-2 px-4 rounded-lg">
+            <a href="{{ route('admin.dashboard') }}" class="text-blue-500 hover:text-blue-900 font-semibold  py-2 px-4 rounded-lg">
                 Go to Dashboard
             </a>
         </div>

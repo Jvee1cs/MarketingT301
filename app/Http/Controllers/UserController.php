@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Add this line
-use Illuminate\Foundation\Validation\ValidatesRequests; // Add this line
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Foundation\Validation\ValidatesRequests; 
 use App\Models\User;
 use App\Exports\UserExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,30 +13,30 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 class UserController extends Controller
 {
-    use ValidatesRequests; // Add this line
+    use ValidatesRequests; 
 
-    // Method to display the login form
+  
     public function showLoginForm()
     {
         return view('login/index');
     }
 
-    // Method to handle the login request
+    
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password'); // Change 'email' to 'username'
 
-        // Authentication
+        
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
+           
             return redirect()->route('admin.dashboard'); // Change 'dashboard' to your desired route
         } else {
-            // Authentication failed...
+            
             return back()->withErrors(['username' => 'Invalid credentials']); // Change 'email' to 'username'
         }
     }
 
-    // Show dashboard
+    
     public function dashboard()
     {
         return view('dashboard.dashboard');
@@ -49,8 +49,7 @@ class UserController extends Controller
         return redirect('/admin/login'); // Redirect to the login route
     }
 
-    // Index method for displaying all users
-    // Index method for displaying all users with search functionality
+    
 public function index(Request $request)
 {
     
@@ -188,7 +187,7 @@ echo "<table border='1' cellpadding='5'>
         <th>ID</th>
         <th>Name</th>
         <th>Username</th>
-        <th>Password</th>
+        
         <th>Email</th>
         <th>Created At</th>
         <th>Updated At</th>
@@ -199,7 +198,7 @@ foreach ($users as $user) {
         <td>{$user->id}</td>
         <td>{$user->name}</td>
         <td>{$user->username}</td>
-        <td>{$user->password}</td>
+        
         <td>{$user->email}</td>
         <td>{$user->created_at}</td>
         <td>{$user->updated_at}</td>

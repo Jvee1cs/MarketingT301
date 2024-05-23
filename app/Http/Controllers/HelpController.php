@@ -9,7 +9,7 @@ class HelpController extends Controller
     //
     public function index()
 {
-    return view('HELP'); // Assuming there's a 'help.blade.php' view file
+    return view('HELP'); 
 }
 
 }
